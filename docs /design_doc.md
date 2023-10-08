@@ -5,7 +5,7 @@ Created at: Uniwersytet Merito
 
 ## Intro
 
-*Why/Problem*
+**Why/Problem**
 The FlashMaster app addresses the need for effective English language learning tools for Polish-speaking individuals.
 
 **How**
