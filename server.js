@@ -5,8 +5,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 
-// Import flashcards from the separate data file
-const flashcards = require('./flashcardsData');
+const flashcards = require('./flashcard-frontend/src/flashcardsData');
 
 app.get('/api/flashcards', (req, res) => {
   res.json(flashcards);
