@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from './firebase';
+import './LoginPage.css'; // Import nowego arkusza stylów
 
 function Login() {
   const navigate = useNavigate();
@@ -25,10 +25,12 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-page">
       <h1>Login</h1>
-      <Link to="/">Home</Link>
-      <Link to="/register">Register</Link>
+      <div className="login-links">
+        <Link to="/" className="login-link">Home</Link>
+        <Link to="/register" className="login-link">Register</Link>
+      </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleLogin}>
         <input
