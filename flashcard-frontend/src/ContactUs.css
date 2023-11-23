@@ -1,0 +1,22 @@
+/* src/components/ContactUsPage.css */
+.contact-us-page {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+  }
+  
