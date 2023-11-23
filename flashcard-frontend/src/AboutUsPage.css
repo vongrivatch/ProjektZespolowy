@@ -1,0 +1,10 @@
+.about-us {
+    padding: 20px;
+  }
+  
+  .about-us-images img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+  }
+  

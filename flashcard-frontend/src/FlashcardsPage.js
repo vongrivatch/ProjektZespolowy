@@ -16,7 +16,7 @@ function FlashcardsPage() {
   const [showAnswer, setShowAnswer] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/flashcards')
+    fetch('flashcardsData.json')
       .then((response) => response.json())
       .then((data) => {
         const shuffledFlashcards = shuffleArray(data);
