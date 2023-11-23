@@ -1,0 +1,31 @@
+.home-page {
+    position: relative;
+    padding: 20px;
+  }
+  
+  .auth-links {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-align: right;
+  }
+  
+  /* Styl dla linków Login i Register */
+  .auth-links a {
+    display: inline-block; /* Ustawienie linków jako elementy inline-block */
+    margin-left: 10px;
+  }
+  
+  .user-info {
+    text-align: center;
+  }
+  
+  .user-info span {
+    display: block; /* Nazwa użytkownika jako blok */
+  }
+  
+  .user-info button {
+    display: block; /* Przycisk jako blok */
+    margin: 10px auto 0; /* Wyśrodkowanie przycisku */
+  }
+  
