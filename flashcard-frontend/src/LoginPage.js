@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from './firebase';
-import './LoginPage.css'; // Import nowego arkusza stylów
+import './LoginPage.css';
 
 function Login() {
   const navigate = useNavigate();

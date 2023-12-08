@@ -21,7 +21,7 @@ function RegisterPage() {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate('/'); // Przekierowanie na stronę główną po pomyślnej rejestracji
+      navigate('/');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('Email address already used. Forgot password?');

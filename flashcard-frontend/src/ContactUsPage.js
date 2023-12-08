@@ -1,6 +1,5 @@
-// src/ContactUsPage.js
 import React, { useState } from 'react';
-import './ContactUs.css'; // Utwórz i zaimportuj plik CSS
+import './ContactUs.css';
 
 function ContactUs() {
   const [formData, setFormData] = useState({
@@ -16,7 +15,6 @@ function ContactUs() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    // Dodaj logikę obsługi formularza
   };
 
   return (

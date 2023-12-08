@@ -1,0 +1,23 @@
+[
+    { "question": "Dog", "answer": "Pies", "image": "placeholder_url" },
+    { "question": "Cat", "answer": "Kot", "image": "placeholder_url" },
+    { "question": "Rabbit", "answer": "Królik", "image": "placeholder_url" },
+    { "question": "Bird", "answer": "Ptak", "image": "placeholder_url" },
+    { "question": "Horse", "answer": "Koń", "image": "placeholder_url" },
+    { "question": "Mouse", "answer": "Mysz", "image": "placeholder_url" },
+    { "question": "Cow", "answer": "Krowa", "image": "placeholder_url" },
+    { "question": "Sheep", "answer": "Owca", "image": "placeholder_url" },
+    { "question": "Fish", "answer": "Ryba", "image": "placeholder_url" },
+    { "question": "Elephant", "answer": "Słoń", "image": "placeholder_url" },
+    { "question": "Bear", "answer": "Niedźwiedź", "image": "placeholder_url" },
+    { "question": "Deer", "answer": "Jeleń", "image": "placeholder_url" },
+    { "question": "Monkey", "answer": "Małpa", "image": "placeholder_url" },
+    { "question": "Lion", "answer": "Lew", "image": "placeholder_url" },
+    { "question": "Tiger", "answer": "Tygrys", "image": "placeholder_url" },
+    { "question": "Kangaroo", "answer": "Kangur", "image": "placeholder_url" },
+    { "question": "Penguin", "answer": "Pingwin", "image": "placeholder_url" },
+    { "question": "Giraffe", "answer": "Żyrafa", "image": "placeholder_url" },
+    { "question": "Zebra", "answer": "Zebra", "image": "placeholder_url" },
+    { "question": "Frog", "answer": "Żaba", "image": "placeholder_url" }
+  ]
+  
