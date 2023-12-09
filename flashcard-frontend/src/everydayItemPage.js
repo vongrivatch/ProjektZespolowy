@@ -42,7 +42,7 @@ function EverydayItemPage() {
   return (
     <div className="App">
       <h1>Flashcard App</h1>
-      <Link to="/">Home</Link>  {}
+      <img className='banner-category-flashcards' src='/bannereveryday.jpg'></img>
       {flashcards.length > 0 && (
         <div className="flashcard">
           <p className="question">

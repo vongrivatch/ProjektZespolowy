@@ -42,20 +42,21 @@ function AnimalPage() {
   return (
     <div className="App">
       <h1>Flashcard App</h1>
-      <Link to="/">Home</Link>  {}
+      <img className='banner-category-flashcards' src='/banneranimals.jpg'></img>
       {flashcards.length > 0 && (
         <div className="flashcard">
           <p className="question">
             <strong>Question:</strong> {flashcards[currentCardIndex].question}
           </p>
+          
           {showAnswer && (
             <p className="answer">
               <strong>Answer:</strong> {flashcards[currentCardIndex].answer}
             </p>
           )}
-          <button onClick={revealAnswer}>Reveal Answer</button>
           <button onClick={previousCard}>Previous Flashcard</button>
           <button onClick={nextCard}>Next Flashcard</button>
+          <button onClick={revealAnswer}>Reveal Answer</button>
         </div>
       )}
     </div>

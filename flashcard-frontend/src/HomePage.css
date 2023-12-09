@@ -48,3 +48,11 @@
   width: 100%;
   height: auto;
 }
+
+.content-section {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}

@@ -37,7 +37,7 @@ function HomeFurnishingTestPage() {
   return (
     <div className="test-page">
       <h1>Test Your Knowledge in Home Furnishings</h1>
-      <Link to="/">Home</Link>
+      <img className='banner-category-flashcards' src='/bannerhome.jpg'></img>
       <div className="card">
         <p>Question: {currentCard.question}</p>
         <input

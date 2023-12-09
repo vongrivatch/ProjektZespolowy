@@ -20,15 +20,12 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
-        {/* Logo powinno być bardziej kolorowe i przyciągające uwagę */}
-        <img src="/logo.jpg" alt="Logo" style={{ width: '150px', height: '100px' }} />
+        <img src="/logo.png" alt="Logo" style={{ width: '150px', height: '100px' }} />
       </Link>
       <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
-        {/* Ikona menu hamburger może być bardziej stylizowana */}
         <i className={`icon ${isOpen ? "icon-close" : "icon-hamburger"}`}></i>
       </div>
       <ul className={`nav-links ${isOpen ? "active" : ""}`}>
-        {/* Linki powinny mieć większą czcionkę i więcej miejsca dla lepszej czytelności */}
         <li><Link to="/">Home</Link></li>
         <li><Link to="/flashcards">Flashcards</Link></li>
         <li><Link to="/test">Test</Link></li>

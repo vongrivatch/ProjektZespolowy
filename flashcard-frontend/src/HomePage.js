@@ -32,6 +32,19 @@ function HomePage() {
       <div className="action-buttons">
         <Link to="/flashcards" className="btn primary-btn">Start Learning</Link>
         <Link to="/about-us" className="btn secondary-btn">Learn More</Link>
+
+  <section className="content-section">
+      <h2>App Features</h2>
+      <p><strong>Customizable Flashcard Sets:</strong> Create and manage your own sets of vocabulary words.</p>
+      <p><strong>Varied Learning Modes:</strong> Learn through games, quizzes, and testing.</p>
+      <p><strong>Track Your Progress:</strong> Keep track of your learning journey and stay motivated.</p>
+  </section>
+
+  <section className="content-section">
+      <h2>Start Your English Learning Journey Today!</h2>
+      <p>Join thousands of users and begin building your English vocabulary efficiently. Register now and discover the easy path to learning English words!</p>
+  </section>
+
       </div>
     </div>
   );

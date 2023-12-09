@@ -39,3 +39,16 @@
     font-size: 1.1em;
   }
   
+  /* Styl dla Slidera */
+.slick-slide img {
+  width: 100%;
+  height: auto;
+}
+
+.learning-section {
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
