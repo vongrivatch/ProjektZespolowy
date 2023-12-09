@@ -1,35 +1,24 @@
-# Etap 1: Zbuduj aplikację React z folderu 'flashcard-frontend'
-FROM node:20 AS build-frontend
+# Użyj obrazu Node.js, aby zbudować aplikację React
+FROM node:20 AS build
 
+# Ustaw katalog roboczy w kontenerze
 WORKDIR /app
 
-# Skopiuj pliki 'package.json' i 'package-lock.json' oraz zainstaluj zależności
+# Skopiuj pliki package.json i zainstaluj zależności
 COPY flashcard-frontend/package*.json ./
 RUN npm install
 
 # Skopiuj pozostałe pliki frontendu i zbuduj projekt
 COPY flashcard-frontend/ ./
 
-# Ustawienie zmiennej środowiskowej dla Node.js 17+, aby używać starszej implementacji OpenSSL
-ENV NODE_OPTIONS=--openssl-legacy-provider
+# Zbuduj aplikację React
 RUN npm run build
 
-# Etap 2: Zbuduj serwer backendowy
-FROM node:20
+# Zainstaluj globalnie pakiet serve, aby móc serwować aplikację
+RUN npm install -g serve
 
-# Ustaw katalog roboczy dla backendu
-WORKDIR /backend
+# Polecenie, które zostanie uruchomione po uruchomieniu kontenera serwuje aplikację
+CMD ["serve", "-s", "build", "-l", "5000"]
 
-# Skopiuj zbudowaną aplikację frontendową do katalogu 'build' w serwerze
-COPY --from=build-frontend /app/build /backend/build
-
-# Skopiuj backendowe 'package.json' i 'package-lock.json' oraz zainstaluj zależności
-COPY package*.json ./
-RUN npm install --only=production
-
-# Skopiuj pozostałe pliki backendu
-COPY server.js ./
-
-EXPOSE 3001
-
-CMD ["node", "server.js"]
+# Zadeklaruj, że w kontenerze będzie otwarty port 5000
+EXPOSE 5000
