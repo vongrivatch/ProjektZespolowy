@@ -14,6 +14,7 @@ function ContactUs() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Tutaj możesz dodać logikę do wysyłania danych formularza
     console.log(formData);
   };
 
@@ -21,8 +22,30 @@ function ContactUs() {
     <div className="contact-us">
       <h1>Contact Us</h1>
       <form onSubmit={handleSubmit}>
-        {/* Formularz */}
-        {/* ... */}
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Your Name"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Your Email"
+          required
+        />
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="Your Message"
+          required
+        />
+        <button type="submit">Send Message</button>
       </form>
     </div>
   );

@@ -1,0 +1,41 @@
+/* TestPage.css */
+.test-page {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .test-links h2 {
+    color: #5D647B; /* Pastelowy odcień dla podtytułu */
+    margin-bottom: 20px;
+  }
+  
+  .test-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  
+  .test-buttons button {
+    padding: 10px 20px;
+    background-color: #A9AEC1;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .test-buttons button:hover {
+    background-color: #8B95A8;
+    transform: scale(1.05);
+  }
+  
+  .home-link {
+    color: #5D647B;
+    text-decoration: none;
+    font-size: 1.1em;
+  }
+  

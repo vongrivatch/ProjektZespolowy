@@ -4,31 +4,39 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #333;
-    color: white;
+    background-color: #f8f9fa; /* Jasne, pastelowe tło */
+    color: #333; /* Ciemniejszy kolor tekstu dla lepszej czytelności */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Delikatny cień dla głębi */
 }
 
 .logo img {
     width: 150px;
-    height: 100px;
+    height: auto; /* Auto height dla zachowania proporcji obrazka */
 }
 
 .menu-icon {
     display: none;
+    font-size: 1.5em; /* Większa ikona menu */
 }
 
 .nav-links {
     list-style-type: none;
     display: flex;
+    align-items: center;
 }
 
 .nav-links li {
-    padding: 0 20px;
+    padding: 0 15px; /* Mniejsze paddingi dla lepszego wykorzystania przestrzeni */
 }
 
 .nav-links li a {
-    color: white;
+    color: #333; /* Ciemniejszy kolor tekstu */
     text-decoration: none;
+    transition: color 0.3s ease; /* Subtelna animacja przy zmianie koloru */
+}
+
+.nav-links li a:hover {
+    color: #007bff; /* Subtelna zmiana koloru przy najechaniu */
 }
 
 /* Responsywność dla urządzeń mobilnych */
@@ -41,11 +49,13 @@
     .nav-links {
         position: absolute;
         right: 0;
-        top: 80px;
+        top: 60px; /* Lepsze dopasowanie do wysokości navbar */
         flex-direction: column;
-        background-color: #333;
+        background-color: #f8f9fa; /* Jasne tło */
         width: 100%;
         display: none;
+        padding-top: 20px; /* Dodatkowe paddingi na górze */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Cień dla menu hamburger */
     }
 
     .nav-links.active {

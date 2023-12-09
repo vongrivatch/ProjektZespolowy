@@ -1,31 +1,50 @@
 .home-page {
-    position: relative;
-    padding: 20px;
-  }
-  
-  .auth-links {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    text-align: right;
-  }
-  
-  /* Styl dla linków Login i Register */
-  .auth-links a {
-    display: inline-block; /* Ustawienie linków jako elementy inline-block */
-    margin-left: 10px;
-  }
-  
-  .user-info {
-    text-align: center;
-  }
-  
-  .user-info span {
-    display: block; /* Nazwa użytkownika jako blok */
-  }
-  
-  .user-info button {
-    display: block; /* Przycisk jako blok */
-    margin: 10px auto 0; /* Wyśrodkowanie przycisku */
-  }
-  
+  position: relative;
+  padding: 20px;
+  text-align: center; /* Wyśrodkowanie treści */
+  background-color: #fff; /* Zachowanie białego tła */
+  color: #333; /* Ustawienie koloru tekstu na ciemniejszy dla lepszej czytelności */
+}
+
+.intro-text {
+  max-width: 600px; /* Ograniczenie szerokości tekstu */
+  margin: 0 auto; /* Wyśrodkowanie bloku tekstu */
+  font-size: 18px; /* Zwiększenie rozmiaru czcionki */
+  line-height: 1.6; /* Ustawienie interlinii dla lepszej czytelności */
+  color: #666; /* Ustawienie jaśniejszego koloru tekstu */
+}
+
+.action-buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.primary-btn {
+  background-color: #4CAF50; /* Zielony kolor dla przycisku głównego */
+}
+
+.primary-btn:hover {
+  background-color: #45a049;
+}
+
+.secondary-btn {
+  background-color: #008CBA; /* Niebieski kolor dla przycisku wtórnego */
+}
+
+.secondary-btn:hover {
+  background-color: #007bb5;
+}
+
+.slick-slide img {
+  width: 100%;
+  height: auto;
+}

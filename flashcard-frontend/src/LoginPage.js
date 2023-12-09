@@ -27,10 +27,6 @@ function Login() {
   return (
     <div className="login-page">
       <h1>Login</h1>
-      <div className="login-links">
-        <Link to="/" className="login-link">Home</Link>
-        <Link to="/register" className="login-link">Register</Link>
-      </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleLogin}>
         <input

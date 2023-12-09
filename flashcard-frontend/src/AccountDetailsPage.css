@@ -8,12 +8,18 @@
   margin-bottom: 20px;
 }
 
-.about-us p {
+.about-us-text {
+  margin: 15% 20%;
   color: #6a6a6a;
   max-width: 800px;
   margin: 0 auto;
   text-align: justify;
   line-height: 1.6;
+}
+
+.about-us-text h2, .about-us-text h3, .about-us-text p, .about-us-text ul {
+  max-width: 100%;
+  text-align: left;
 }
 
 /* Styl dla karuzeli z infografikami */
@@ -38,22 +44,16 @@
 
 /* Responsive design adjustments */
 @media (max-width: 768px) {
-  .about-us p, .about-us ul {
-    max-width: 100%;
-    text-align: left;
+  .about-us-text {
+    margin: 10% 15%;
   }
 }
 
 @media (max-width: 480px) {
-  .about-us {
-    padding: 10px;
+  .about-us-text {
+    margin: 5% 10%;
   }
-
-  .about-us h1 {
-    font-size: 24px;
-  }
-
-  .about-us p, .about-us ul {
+  .about-us-text h2, .about-us-text h3, .about-us-text p, .about-us-text ul {
     font-size: 14px;
   }
 }

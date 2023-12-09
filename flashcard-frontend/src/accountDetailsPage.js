@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getAuth, updatePassword, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import './AccountDetailsPage.css'; // Dodaj odpowiedni plik CSS
 
 function AccountDetailsPage() {
   const auth = getAuth();
@@ -17,9 +18,9 @@ function AccountDetailsPage() {
   const changePassword = () => {
     if (auth.currentUser) {
       updatePassword(auth.currentUser, newPassword).then(() => {
-        alert("Hasło zostało zmienione.");
+        alert("Password has been changed.");
       }).catch((error) => {
-        console.error("Błąd przy zmianie hasła:", error);
+        console.error("Error changing password:", error);
       });
     }
   };
@@ -28,26 +29,26 @@ function AccountDetailsPage() {
     signOut(auth).then(() => {
       navigate('/');
     }).catch((error) => {
-      console.error('Błąd podczas wylogowywania:', error);
+      console.error('Error logging out:', error);
     });
   };
 
   return (
     <div className="account-details">
-      <h1>Szczegóły konta</h1>
-      <p>Nazwa użytkownika: {auth.currentUser?.email}</p>
-      <p>Data rejestracji: {auth.currentUser?.metadata.creationTime}</p>
+      <h1>Account Details</h1>
+      <p>Username: {auth.currentUser?.email}</p>
+      <p>Registration Date: {auth.currentUser?.metadata.creationTime}</p>
       <div>
         <input 
           type="password" 
           value={newPassword} 
           onChange={(e) => setNewPassword(e.target.value)} 
-          placeholder="Nowe hasło" 
+          placeholder="New Password" 
         />
-        <button onClick={changePassword}>Zmień hasło</button>
+        <button onClick={changePassword}>Change Password</button>
       </div>
-      <button onClick={handleLogout}>Wyloguj się</button>
-      <Link to="/">Powrót do strony głównej</Link>
+      <button onClick={handleLogout}>Log Out</button>
+      <Link to="/">Back to Home</Link>
     </div>
   );
 }

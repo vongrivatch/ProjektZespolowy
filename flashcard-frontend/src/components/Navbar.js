@@ -20,26 +20,25 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
-        {/* Tutaj umieść logo */}
-        <img src="/path-to-logo.jpg" alt="Logo" style={{ width: '150px', height: '100px' }} />
+        {/* Logo powinno być bardziej kolorowe i przyciągające uwagę */}
+        <img src="/logo.jpg" alt="Logo" style={{ width: '150px', height: '100px' }} />
       </Link>
       <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
-        {/* Ikona menu hamburger */}
-        <i className={isOpen ? "fas fa-times" : "fas fa-bars"}></i>
+        {/* Ikona menu hamburger może być bardziej stylizowana */}
+        <i className={`icon ${isOpen ? "icon-close" : "icon-hamburger"}`}></i>
       </div>
-      <ul className={isOpen ? "nav-links active" : "nav-links"}>
+      <ul className={`nav-links ${isOpen ? "active" : ""}`}>
+        {/* Linki powinny mieć większą czcionkę i więcej miejsca dla lepszej czytelności */}
         <li><Link to="/">Home</Link></li>
         <li><Link to="/flashcards">Flashcards</Link></li>
         <li><Link to="/test">Test</Link></li>
         <li><Link to="/about-us">About Us</Link></li>
         <li><Link to="/contact-us">Contact Us</Link></li>
         {user ? (
-          // Jeśli użytkownik jest zalogowany, wyświetl jego email jako link
-          <li>
-            <Link to="/account-details">{user.email}</Link> {/* Link do szczegółów konta */}
+          <li className="user-info">
+            <Link to="/account-details" className="user-name">{user.email}</Link>
           </li>
         ) : (
-          // Jeśli nie jest zalogowany, wyświetl opcje logowania/rejestracji
           <>
             <li><Link to="/login">Login</Link></li>
             <li><Link to="/register">Register</Link></li>

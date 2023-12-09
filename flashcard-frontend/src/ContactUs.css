@@ -1,22 +1,48 @@
 /* src/components/ContactUsPage.css */
 .contact-us-page {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 10px;
-  }
-  
+  max-width: 600px;
+  margin: auto;
+  padding: 40px; /* Zwiększony padding */
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Lekki cień dla głębi */
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333; /* Ciemniejszy tekst dla lepszej czytelności */
+  font-size: 1.1em; /* Nieco większe fonty */
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 15px; /* Większy padding dla większej przestrzeni */
+  border: 1px solid #ccc; /* Subtelna obramówka */
+  border-radius: 8px; /* Zaokrąglone rogi */
+  font-size: 1em;
+}
+
+.form-group textarea {
+  height: 150px; /* Większa wysokość dla pola tekstowego */
+}
+
+.contact-us-page button {
+  width: 100%;
+  padding: 15px;
+  background-color: #f2f2f2; /* Pastelowy kolor tła */
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-us-page button:hover {
+  background-color: #e2e2e2; /* Ciemniejszy kolor przy najechaniu */
+}

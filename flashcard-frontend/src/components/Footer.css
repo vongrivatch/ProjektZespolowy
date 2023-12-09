@@ -1,10 +1,32 @@
 /* src/Footer.css */
 .footer {
-    background-color: #f1f1f1;
-    text-align: center;
-    padding: 10px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
-  
+  background-color: #FAFAFA; /* Lekko zmieniony kolor tła na bardziej subtelną pastelową wersję */
+  color: #707070; /* Ciemniejszy kolor tekstu dla lepszej widoczności */
+  text-align: center;
+  padding: 20px 0; /* Zwiększony padding dla lepszego wyglądu */
+  margin-top: 30px;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Subtelny cień dla dodania głębi */
+  font-size: 0.9em; /* Mniejszy rozmiar czcionki */
+}
+
+.footer-content {
+  max-width: 1200px; /* Maksymalna szerokość treści */
+  margin: auto; /* Centrowanie treści */
+}
+
+.social-media {
+  margin-top: 10px; /* Odstęp od tekstu */
+}
+
+.social-media a {
+  color: #707070; /* Kolor ikon mediów społecznościowych */
+  margin: 0 10px; /* Odstępy między ikonami */
+  font-size: 1.2em; /* Rozmiar ikon */
+  transition: color 0.3s; /* Animacja zmiany koloru */
+}
+
+.social-media a:hover {
+  color: #333; /* Kolor ikon po najechaniu */
+}

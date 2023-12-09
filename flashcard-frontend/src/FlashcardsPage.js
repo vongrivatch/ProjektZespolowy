@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './App.css';
+import './FlashcardsPage.css';
 
 function FlashcardsPage() {
   return (
     <div className="App">
       <h1>Flashcard App</h1>
-      <Link to="/">Home</Link>
 
       <div className="category-buttons">
         <Link to="/animals"><button>Animals</button></Link>
@@ -14,6 +13,9 @@ function FlashcardsPage() {
         <Link to="/everyday-items"><button>Everyday Items</button></Link>
         <Link to="/home-furnishings"><button>Home Furnishings</button></Link>
       </div>
+
+      {/* Tutaj możesz dodać logikę do wyświetlania i obsługi flashcards, jeśli jest to potrzebne */}
+      {/* Przyciski do przewijania kart powinny znaleźć się tutaj */}
     </div>
   );
 }
