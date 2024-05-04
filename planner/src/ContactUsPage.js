@@ -14,7 +14,6 @@ function ContactUs() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Tutaj możesz dodać logikę do wysyłania danych formularza
     console.log(formData);
   };
 

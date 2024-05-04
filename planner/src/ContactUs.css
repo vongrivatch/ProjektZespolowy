@@ -1,48 +1,46 @@
-/* src/components/ContactUsPage.css */
-.contact-us-page {
+.contact-us {
+  display: flex;
+  flex-direction: column;
   max-width: 600px;
   margin: auto;
-  padding: 40px; /* Zwiększony padding */
-  background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Lekki cień dla głębi */
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background: #ffffff;
+  align-items: center;
 }
 
-.form-group {
-  margin-bottom: 25px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 10px;
-  color: #333; /* Ciemniejszy tekst dla lepszej czytelności */
-  font-size: 1.1em; /* Nieco większe fonty */
-}
-
-.form-group input,
-.form-group textarea {
+.contact-us form {
   width: 100%;
-  padding: 15px; /* Większy padding dla większej przestrzeni */
-  border: 1px solid #ccc; /* Subtelna obramówka */
-  border-radius: 8px; /* Zaokrąglone rogi */
+}
+
+.contact-us input,
+.contact-us textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 8px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: block;
+  font-family: 'Arial', sans-serif; 
   font-size: 1em;
 }
 
-.form-group textarea {
-  height: 150px; /* Większa wysokość dla pola tekstowego */
-}
-
-.contact-us-page button {
+.contact-us button {
+  padding: 12px 20px;
   width: 100%;
-  padding: 15px;
-  background-color: #f2f2f2; /* Pastelowy kolor tła */
-  color: #333;
+  background-color: #4CAF50;
+  color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1.1em;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
-.contact-us-page button:hover {
-  background-color: #e2e2e2; /* Ciemniejszy kolor przy najechaniu */
+.contact-us button:hover {
+  background-color: #45a049;
+}
+
+.contact-us textarea {
+  height: 150px;
 }

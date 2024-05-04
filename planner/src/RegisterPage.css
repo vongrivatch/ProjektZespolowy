@@ -17,6 +17,8 @@
     border-radius: 4px;
     display: block;
     width: 100%;
+    font-family: 'Arial', sans-serif; 
+    font-size: 1em;
 }
 
 .register-form button {

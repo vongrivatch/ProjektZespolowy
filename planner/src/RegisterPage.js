@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, getFirestore, updateDoc, arrayUnion, setDoc } from 'firebase/firestore';
 import app from './services/firebase';
-
+import './RegisterPage.css';
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ function RegisterPage() {
 
       await setDoc(doc(db, "Users", userId), {
         email: email,
-        name: "",  
+        name: "",
         groupId: familyCode || ""
       });
 
@@ -51,7 +51,7 @@ function RegisterPage() {
   };
 
   return (
-    <div>
+    <div className="register-form">
       <h1>Register</h1>
       {error && (
         <p style={{ color: 'red' }}>
@@ -59,7 +59,7 @@ function RegisterPage() {
         </p>
       )}
       <form onSubmit={handleRegister}>
-        <div>
+        <div className="input-group">
           <label htmlFor="email">Email:</label>
           <input
             id="email"
@@ -70,7 +70,7 @@ function RegisterPage() {
             required
           />
         </div>
-        <div>
+        <div className="input-group">
           <label htmlFor="password">Password (6 characters minimum):</label>
           <input
             id="password"
@@ -81,7 +81,7 @@ function RegisterPage() {
             required
           />
         </div>
-        <div>
+        <div className="input-group">
           <label htmlFor="confirm-password">Confirm Password:</label>
           <input
             id="confirm-password"
@@ -92,7 +92,7 @@ function RegisterPage() {
             required
           />
         </div>
-        <div>
+        <div className="input-group">
           <label htmlFor="family-code">Family Code (optional):</label>
           <input
             id="family-code"
