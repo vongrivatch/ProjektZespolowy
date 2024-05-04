@@ -30,26 +30,25 @@ function AboutUsPage() {
         </div>
       </Slider>
       <div className="about-us-text">
-        <h2>Why Us?</h2>
-        <p>Welcome to <strong>FlashLearn</strong>, your ultimate online platform for learning Polish vocabulary through engaging and interactive flashcards. At <strong>FlashLearn</strong>, we are dedicated to making language learning accessible, fun, and effective for young learners aged 15-20. Our mission is to bridge language barriers and open up a world of opportunities for you.</p>
+      <h2>Why Us?</h2>
+      <p>Welcome to <strong>PurrfectPlanner</strong>, your ultimate online platform for planning and sharing tasks with your family. At <strong>PurrfectPlanner</strong>, we focus on simplicity, collaboration, and efficiency, helping families manage their daily duties with ease. Our goal is to facilitate time and task management in a way that strengthens family bonds and allows every family member to actively participate in home life. Join us and discover how easy it can be to plan and share tasks, creating a harmonious home full of cooperation and support.</p>
+      <h3>Why PurrfectPlanner?</h3>
+      <p><strong>PurrfectPlanner</strong> is designed with your family's needs in mind. We understand the challenges of managing a busy household and coordinating everyone's schedules. That's why we've created a solution that is not only <strong>user-friendly</strong> but also <strong>versatile</strong> and <strong>inclusive</strong>.</p>
 
-        <h3>Why FlashLearn?</h3>
-        <p><strong>FlashLearn</strong> is designed with your learning needs in mind. We understand the challenges of learning a new language, especially for young individuals who are constantly juggling between studies and personal commitments. That's why we've created a solution that is not only <strong>efficient</strong> but also <strong>flexible</strong> and <strong>engaging</strong>.</p>
+      <h3>Our Approach</h3>
+      <p>We believe in making task management as intuitive and straightforward as possible. Our platform uses cutting-edge technology to ensure that you can share responsibilities and update each other in real-time. Family members of all ages can easily access their tasks, contributing to a well-organized home.</p>
 
-        <h3>Our Approach</h3>
-        <p>Our learning methodology is based on proven techniques that enhance memory retention and make learning a new language a breeze. The <strong>spaced repetition</strong> system ensures that you review words at optimal intervals, solidifying your understanding and recall. The interactive flashcards are designed to keep you engaged and motivated throughout your learning journey.</p>
+      <h3>Features That Make Managing Tasks Exciting</h3>
+      <ul>
+        <li><strong>Shared Task Lists:</strong> Create and manage tasks collectively. Everyone can add, complete, and review tasks, ensuring nothing is overlooked.</li>
+        <li><strong>Customizable Alerts:</strong> Set reminders for individual tasks or events, so every family member stays informed and prepared.</li>
+        <li><strong>Family Calendar:</strong> View all family events and tasks in one place. Plan ahead with a calendar designed to support the whole family's schedule.</li>
+        <li><strong>Real-Time Notifications:</strong> Get instant updates when tasks are added or completed, and when changes are made to the schedule.</li>
+      </ul>
 
-        <h3>Features That Make Learning Exciting</h3>
-        <ul>
-          <li><strong>Interactive Flashcards:</strong> Learn Polish vocabulary with visually appealing and interactive flashcards that make memorization easy and fun.</li>
-          <li><strong>Customizable Learning Experience:</strong> Tailor your learning path according to your level and pace. Choose the topics that interest you the most.</li>
-          <li><strong>Progress Tracking:</strong> Keep track of your learning journey with our progress tracker and stay motivated by witnessing your growth.</li>
-          <li><strong>Community Support:</strong> Join our community of learners, share your experiences, and get support from peers and language experts.</li>
-        </ul>
-
-        <h3>Join Us Today!</h3>
-        <p>Embark on your language learning journey with <strong>FlashLearn</strong> and unlock the door to a new culture and opportunities. Whether you are a beginner or looking to advance your Polish vocabulary, <strong>FlashLearn</strong> is here to guide you every step of the way. Sign up today and discover the joy of learning Polish with ease and fun!</p>
-      </div>
+      <h3>Join Us Today!</h3>
+      <p>Start organizing your family life with <strong>PurrfectPlanner</strong> and experience the peace of mind that comes with a well-coordinated home. Whether you're trying to manage daily chores or planning for special events, <strong>PurrfectPlanner</strong> is here to help you every step of the way. Sign up today and transform the way your family collaborates!</p>
+    </div>
     </div>
   );
 }

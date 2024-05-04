@@ -1,17 +1,17 @@
-# ProjektZespolowy
+# ProjektInzynierski
 
-**FlashMaster app**
+**PurrfectPlanner app**
 
-Author: Julia Grzywacz, Maciej Trojan
+Author: Julia Grzywacz
 Created at: Uniwersytet Merito
 
 ## Intro
 
 **Why/Problem**
-The FlashMaster app addresses the need for effective English language learning tools for Polish-speaking individuals.
+Many families struggle with organizing daily tasks and events efficiently, which can lead to missed appointments and uncompleted tasks. There's a need for a centralized solution that helps manage family schedules effectively.
 
 **How**
-We aim to achieve this by leveraging flashcards as a proven learning method, offering an engaging and accessible platform for language acquisition.
+Our solution, PurrfectPlanner, uses a shared digital platform to address these challenges. By implementing an intuitive and accessible task planner that the entire family can use, PurrfectPlanner makes it easier to coordinate activities, share responsibilities, and communicate seamlessly.
 
 **What**
-The FlashMaster app is a web application designed to assist Polish-speaking users in learning English through flashcards, interactive lessons, and quizzes.
+PurrfectPlanner is a web application designed to help families manage their daily tasks and schedules. It features shared task lists, customizable alerts, a family calendar, and real-time notifications, all aimed at improving the way families organize and collaborate on everyday tasks.

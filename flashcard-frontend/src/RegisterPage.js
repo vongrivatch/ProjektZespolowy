@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import app from './firebase';
+import app from './services/firebase';
 
 function RegisterPage() {
   const navigate = useNavigate();
