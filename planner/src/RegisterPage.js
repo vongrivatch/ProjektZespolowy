@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, getFirestore, updateDoc, arrayUnion, setDoc } from 'firebase/firestore';
 import app from './services/firebase';
+
 
 function RegisterPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [familyCode, setFamilyCode] = useState('');
   const [error, setError] = useState('');
 
   const auth = getAuth(app);
+  const db = getFirestore(app);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -20,7 +24,22 @@ function RegisterPage() {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userId = userCredential.user.uid;
+
+      await setDoc(doc(db, "Users", userId), {
+        email: email,
+        name: "",  
+        groupId: familyCode || ""
+      });
+
+      if (familyCode) {
+        const groupRef = doc(db, "Groups", familyCode);
+        await updateDoc(groupRef, {
+          members: arrayUnion(userId)
+        });
+      }
+
       navigate('/');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
@@ -71,6 +90,16 @@ function RegisterPage() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm Password"
             required
+          />
+        </div>
+        <div>
+          <label htmlFor="family-code">Family Code (optional):</label>
+          <input
+            id="family-code"
+            type="text"
+            value={familyCode}
+            onChange={(e) => setFamilyCode(e.target.value)}
+            placeholder="Enter family code if you have one"
           />
         </div>
         <button type="submit">Register</button>

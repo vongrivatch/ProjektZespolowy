@@ -1,16 +1,19 @@
-
 import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import "firebase/auth";
 
+
 const firebaseConfig = {
-  apiKey: "AIzaSyACmCEOrSWE_fm0nNu29rCN6Vj_7m15N_4",
-  authDomain: "flashcardsapp-b79a0.firebaseapp.com",
-  projectId: "flashcardsapp-b79a0",
-  storageBucket: "flashcardsapp-b79a0.appspot.com",
-  messagingSenderId: "800209669108",
-  appId: "1:800209669108:web:eae7520cbdd95d726047a1"
+  apiKey: "AIzaSyDtUEe0vwUj5e1ZDNQIfNCmnXRQ6x3lDDE",
+  authDomain: "purrfectplanner-a17d3.firebaseapp.com",
+  projectId: "purrfectplanner-a17d3",
+  storageBucket: "purrfectplanner-a17d3.appspot.com",
+  messagingSenderId: "138908230443",
+  appId: "1:138908230443:web:304875007bb43942d3db6e",
+  measurementId: "G-HN2GSBH0V6"
 };
 
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 export default app;
