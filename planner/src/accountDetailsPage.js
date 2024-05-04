@@ -1,17 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, updatePassword, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { db } from './services/firebase';
 import { Link } from 'react-router-dom';
-import './AccountDetailsPage.css'; // Dodaj odpowiedni plik CSS
+import './AccountDetailsPage.css';
 
 function AccountDetailsPage() {
   const auth = getAuth();
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState('');
+  const [groupName, setGroupName] = useState('');
+  const [groupId, setGroupId] = useState('');
 
   useEffect(() => {
     if (!auth.currentUser) {
       navigate('/login');
+    } else {
+      const getUserGroup = async () => {
+        const userRef = doc(db, "Users", auth.currentUser.uid);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists() && userDoc.data().groupId) {
+          const groupRef = doc(db, "Groups", userDoc.data().groupId);
+          const groupDoc = await getDoc(groupRef);
+          if (groupDoc.exists()) {
+            setGroupName(groupDoc.data().groupName);
+          } else {
+            setGroupName("No group assigned");
+          }
+        }
+      };
+
+      getUserGroup();
     }
   }, [auth, navigate]);
 
@@ -33,11 +53,38 @@ function AccountDetailsPage() {
     });
   };
 
+  const joinGroup = async () => {
+    if (groupId) {
+      const groupRef = doc(db, "Groups", groupId);
+      const groupDoc = await getDoc(groupRef);
+      if (groupDoc.exists()) {
+        const userRef = doc(db, "Users", auth.currentUser.uid);
+        await updateDoc(userRef, {
+          groupId: groupId
+        });
+        setGroupName(groupDoc.data().groupName);
+      } else {
+        alert("No group found with this ID");
+      }
+    }
+  };
+
   return (
     <div className="account-details">
       <h1>Account Details</h1>
       <p>Username: {auth.currentUser?.email}</p>
-      <p>Registration Date: {auth.currentUser?.metadata.creationTime}</p>
+      <p>Group Name: {groupName}</p>
+      {!groupName && (
+        <div>
+          <input 
+            type="text" 
+            value={groupId} 
+            onChange={(e) => setGroupId(e.target.value)} 
+            placeholder="Enter Group ID" 
+          />
+          <button onClick={joinGroup}>Join Group</button>
+        </div>
+      )}
       <div>
         <input 
           type="password" 

@@ -1,59 +1,48 @@
-.about-us {
+.account-details {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
   padding: 20px;
-  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background: #ffffff;
 }
 
-.about-us h1 {
-  color: #4a4a4a;
-  margin-bottom: 20px;
+.account-details input,
+.account-details button {
+  padding: 12px 20px;
+  margin-top: 8px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  font-family: 'Arial', sans-serif;
+  font-size: 1em;
 }
 
-.about-us-text {
-  margin: 15% 20%;
-  color: #6a6a6a;
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: justify;
-  line-height: 1.6;
+.account-details button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
-.about-us-text h2, .about-us-text h3, .about-us-text p, .about-us-text ul {
-  max-width: 100%;
-  text-align: left;
+.account-details button:hover {
+  background-color: #45a049;
 }
 
-/* Styl dla karuzeli z infografikami */
-.about-us-images img {
-  max-width: 100%;
-  height: auto;
-  margin: 10px 0;
+.account-details input {
+  margin-bottom: 10px; 
 }
 
-/* Styl dla slidera (karuzeli) */
-.slick-slide {
-  outline: none;
+.account-details a {
+  display: block;
+  margin-top: 10px;
+  color: #4CAF50;
+  text-decoration: none;
 }
 
-.slick-dots li button:before {
-  color: #4a4a4a;
-}
-
-.slick-dots li.slick-active button:before {
-  color: #007bff;
-}
-
-/* Responsive design adjustments */
-@media (max-width: 768px) {
-  .about-us-text {
-    margin: 10% 15%;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-us-text {
-    margin: 5% 10%;
-  }
-  .about-us-text h2, .about-us-text h3, .about-us-text p, .about-us-text ul {
-    font-size: 14px;
-  }
+.account-details a:hover {
+  color: #45a049;
 }
