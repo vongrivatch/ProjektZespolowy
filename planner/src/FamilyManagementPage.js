@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { doc, getFirestore, setDoc, collection, updateDoc, getDoc } from 'firebase/firestore';
 import './FamilyManagementPage.css';
 
 function FamilyManagementPage() {
-  const navigate = useNavigate();
   const auth = getAuth();
   const db = getFirestore();
   const [familyId, setFamilyId] = useState('');
