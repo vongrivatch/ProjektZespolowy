@@ -22,17 +22,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "lint": "eslint . --fix",
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts --openssl-legacy-provider test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  
   },
   "browserslist": {
     "production": [
@@ -48,11 +42,8 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@eslint/js": "^9.2.0",
     "@svgr/plugin-svgo": "^8.1.0",
     "@svgr/webpack": "^8.1.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.34.1",
     "globals": "^15.1.0",
     "postcss": "^8.4.38",
     "resolve-url-loader": "^5.0.0",
