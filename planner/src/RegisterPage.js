@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, getFirestore, updateDoc, arrayUnion, setDoc } from 'firebase/firestore';
+import { doc, getFirestore, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import app from './services/firebase';
 import './RegisterPage.css';
 
