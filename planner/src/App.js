@@ -10,7 +10,8 @@ import RegisterPage from './RegisterPage';
 import ForgotPasswordPage from './ForgotPasswordPage';
 import AboutUsPage from './AboutUsPage';
 import ContactUsPage from './ContactUsPage';
-import AccountDetailsPage from './accountDetailsPage';
+import AccountDetailsPage from './AccountDetailsPage';
+import FamilyManagementPage from './FamilyManagementPage'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/account-details" element={<AccountDetailsPage />} />
+          <Route path="/family-management" element={<FamilyManagementPage />} />
         </Routes>
         <Footer />
       </div>

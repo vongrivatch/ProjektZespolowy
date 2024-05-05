@@ -3,7 +3,6 @@ import { getAuth, updatePassword, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from './services/firebase';
-import { Link } from 'react-router-dom';
 import './AccountDetailsPage.css';
 
 function AccountDetailsPage() {
@@ -12,6 +11,7 @@ function AccountDetailsPage() {
   const [newPassword, setNewPassword] = useState('');
   const [groupName, setGroupName] = useState('');
   const [groupId, setGroupId] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!auth.currentUser) {
@@ -63,8 +63,9 @@ function AccountDetailsPage() {
           groupId: groupId
         });
         setGroupName(groupDoc.data().groupName);
+        setError('');
       } else {
-        alert("No group found with this ID");
+        setError("No group found with this ID");
       }
     }
   };
@@ -80,9 +81,10 @@ function AccountDetailsPage() {
             type="text" 
             value={groupId} 
             onChange={(e) => setGroupId(e.target.value)} 
-            placeholder="Enter Group ID" 
+            placeholder="Enter your FamilyID" 
           />
           <button onClick={joinGroup}>Join Group</button>
+          <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>
         </div>
       )}
       <div>
@@ -95,7 +97,6 @@ function AccountDetailsPage() {
         <button onClick={changePassword}>Change Password</button>
       </div>
       <button onClick={handleLogout}>Log Out</button>
-      <Link to="/">Back to Home</Link>
     </div>
   );
 }

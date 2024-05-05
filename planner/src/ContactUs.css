@@ -19,6 +19,7 @@
   width: 100%;
   padding: 12px 20px;
   margin-top: 8px;
+  margin-bottom: 10px;
   border: 2px solid #ccc;
   border-radius: 4px;
   display: block;
@@ -35,6 +36,7 @@
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
+  font-size: 1em;
 }
 
 .contact-us button:hover {
@@ -43,4 +45,16 @@
 
 .contact-us textarea {
   height: 150px;
+  resize: none;
+}
+
+.contact-us a {
+  display: block;
+  margin-top: 10px;
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.contact-us a:hover {
+  color: #45a049;
 }
