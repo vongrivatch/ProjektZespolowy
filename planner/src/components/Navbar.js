@@ -30,11 +30,11 @@ function Navbar() {
         <li><Link to="/contact-us">Contact Us</Link></li>
         {user ? (
           <>
-            <li className="user-info">
-              <Link to="/account-details" className="user-name">{user.email}</Link>
-            </li>
             <li>
               <Link to="/family-management">Family Management</Link>
+            </li>
+            <li className="user-info">
+              <Link to="/account-details" className="user-name">{user.email}</Link>
             </li>
           </>
         ) : (

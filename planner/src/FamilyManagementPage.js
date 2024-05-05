@@ -9,6 +9,7 @@ function FamilyManagementPage() {
   const auth = getAuth();
   const db = getFirestore();
   const [familyId, setFamilyId] = useState('');
+  const [inputFamilyId, setInputFamilyId] = useState('');
   const [familyMembers, setFamilyMembers] = useState([]);
   const [error, setError] = useState('');
 
@@ -24,7 +25,7 @@ function FamilyManagementPage() {
         console.error("Error fetching user family info: ", error);
       });
     }
-  }, [auth.currentUser]);
+  }, [auth.currentUser, db]);
 
   const fetchFamilyMembers = async (familyId) => {
     const familyRef = doc(db, "Families", familyId);
@@ -37,32 +38,29 @@ function FamilyManagementPage() {
     }
   };
 
-  const createFamily = async () => {
-    if (!auth.currentUser || familyId) return; // Prevent creating/joining another family if already in one
-    try {
-      const newFamilyRef = doc(collection(db, "Families"));
-      const newFamilyId = newFamilyRef.id;
-  
-      await setDoc(newFamilyRef, {
-        admin: auth.currentUser.uid,
-        members: [auth.currentUser.uid]
-      });
-  
-      await updateDoc(doc(db, "Users", auth.currentUser.uid), {
-        familyId: newFamilyId
-      });
-  
-      setFamilyId(newFamilyId);
-      setFamilyMembers([auth.currentUser.email]); // Immediately show current user as a member
-    } catch (error) {
-      console.error("Error creating family: ", error);
-      setError(`Failed to create a family. Error: ${error.message}`);
-    }
-  };
+  const joinFamily = async () => {
+    if (inputFamilyId && !familyId) {
+        const familyRef = doc(db, "Families", inputFamilyId);
+        const familyDoc = await getDoc(familyRef);
+        if (familyDoc.exists()) {
+            await updateDoc(doc(db, "Users", auth.currentUser.uid), {
+                familyId: inputFamilyId
+            });
 
-  const joinFamily = () => {
-    navigate('/account-details');
-  };
+            await updateDoc(familyRef, {
+                members: [...familyDoc.data().members, auth.currentUser.uid]
+            });
+
+            setFamilyId(inputFamilyId);
+            fetchFamilyMembers(inputFamilyId);
+            setError('');
+        } else {
+            setError("No family found with this ID.");
+        }
+    } else {
+        setError("You are already assigned to a family.");
+    }
+};
 
   return (
     <div className="family-management">
@@ -76,9 +74,16 @@ function FamilyManagementPage() {
           </div>
         </>
       ) : (
-        <button onClick={createFamily}>Create a Family</button>
+        <>
+          <input
+            type="text"
+            value={inputFamilyId}
+            onChange={(e) => setInputFamilyId(e.target.value)}
+            placeholder="Enter Family ID"
+          />
+          <button onClick={joinFamily}>Join Family</button>
+        </>
       )}
-      <button onClick={joinFamily}>Join a Family</button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );

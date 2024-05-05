@@ -27,6 +27,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/account-details" element={<AccountDetailsPage />} />
           <Route path="/family-management" element={<FamilyManagementPage />} />
+          <Route path="/account-details" element={<AccountDetailsPage />} />
         </Routes>
         <Footer />
       </div>

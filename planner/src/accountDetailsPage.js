@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, updatePassword, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from './services/firebase';
 import './AccountDetailsPage.css';
 
@@ -12,7 +12,6 @@ function AccountDetailsPage() {
   const [familyName, setFamilyName] = useState('');
   const [familyId, setFamilyId] = useState('');
   const [members, setMembers] = useState([]);
-  const [inputFamilyId, setInputFamilyId] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -69,42 +68,14 @@ function AccountDetailsPage() {
     }
   };
 
-  const joinFamily = async () => {
-    if (inputFamilyId && !familyId) {
-      const familyRef = doc(db, "Families", inputFamilyId);
-      const familyDoc = await getDoc(familyRef);
-      if (familyDoc.exists()) {
-        await updateDoc(doc(db, "Users", auth.currentUser.uid), {
-          familyId: inputFamilyId
-        });
-        setFamilyId(inputFamilyId);
-        setFamilyName(familyDoc.data().name);
-        fetchFamilyMembers(inputFamilyId);
-        setError('');
-      } else {
-        setError("No family found with this ID.");
-      }
-    } else {
-      setError("You are already assigned to a family.");
-    }
-  };
-
   return (
     <div className="account-details">
       <h1>Account Details</h1>
       <p>Username: {auth.currentUser?.email}</p>
-      {familyId ? (
-        <p>Your Family ID: {familyId}</p>
-      ) : (
-        <div>
-          <input 
-            type="text" 
-            value={inputFamilyId} 
-            onChange={(e) => setInputFamilyId(e.target.value)} 
-            placeholder="Enter Family ID" 
-          />
-          <button onClick={joinFamily}>Join Family</button>
-        </div>
+      {familyId && (
+        <>
+          <p>Your Family ID: {familyId}</p>
+        </>
       )}
       <div>
         <input 
