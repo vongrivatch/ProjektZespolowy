@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, getFirestore, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import app from './services/firebase';
 import './RegisterPage.css';
 
@@ -10,7 +10,6 @@ function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [familyCode, setFamilyCode] = useState('');
   const [error, setError] = useState('');
 
   const auth = getAuth(app);
@@ -30,20 +29,13 @@ function RegisterPage() {
       await setDoc(doc(db, "Users", userId), {
         email: email,
         name: "",
-        groupId: familyCode || ""
+        familyId: ""
       });
-
-      if (familyCode) {
-        const groupRef = doc(db, "Groups", familyCode);
-        await updateDoc(groupRef, {
-          members: arrayUnion(userId)
-        });
-      }
 
       navigate('/');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
-        setError('Email address already used. Forgot password?');
+        setError('This email address is already in use. Forgot password?');
       } else {
         setError('Failed to create an account. Please try again.');
       }
@@ -54,9 +46,9 @@ function RegisterPage() {
     <div className="register-form">
       <h1>Register</h1>
       {error && (
-        <p style={{ color: 'red' }}>
-          {error} {error === 'Email address already used. Forgot password?' && <Link to="/forgot-password">Click here</Link>}
-        </p>
+        <div style={{ color: 'red' }}>
+          {error} {error.includes('This email address is already in use') && <Link to="/forgot-password">Click here</Link>}
+        </div>
       )}
       <form onSubmit={handleRegister}>
         <div className="input-group">
@@ -90,16 +82,6 @@ function RegisterPage() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm Password"
             required
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="family-code">Family Code (optional):</label>
-          <input
-            id="family-code"
-            type="text"
-            value={familyCode}
-            onChange={(e) => setFamilyCode(e.target.value)}
-            placeholder="Enter family code if you have one"
           />
         </div>
         <button type="submit">Register</button>

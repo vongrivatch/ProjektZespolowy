@@ -34,7 +34,7 @@ function Navbar() {
               <Link to="/account-details" className="user-name">{user.email}</Link>
             </li>
             <li>
-              <Link to="/family-management">Join a Family</Link>
+              <Link to="/family-management">Family Management</Link>
             </li>
           </>
         ) : (

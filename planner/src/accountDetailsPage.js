@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, updatePassword, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from './services/firebase';
 import './AccountDetailsPage.css';
 
@@ -9,64 +9,83 @@ function AccountDetailsPage() {
   const auth = getAuth();
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState('');
-  const [groupName, setGroupName] = useState('');
-  const [groupId, setGroupId] = useState('');
+  const [familyName, setFamilyName] = useState('');
+  const [familyId, setFamilyId] = useState('');
+  const [members, setMembers] = useState([]);
+  const [inputFamilyId, setInputFamilyId] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (!auth.currentUser) {
       navigate('/login');
     } else {
-      const getUserGroup = async () => {
-        const userRef = doc(db, "Users", auth.currentUser.uid);
-        const userDoc = await getDoc(userRef);
-        if (userDoc.exists() && userDoc.data().groupId) {
-          const groupRef = doc(db, "Groups", userDoc.data().groupId);
-          const groupDoc = await getDoc(groupRef);
-          if (groupDoc.exists()) {
-            setGroupName(groupDoc.data().groupName);
-          } else {
-            setGroupName("No group assigned");
-          }
-        }
-      };
-
-      getUserGroup();
+      fetchFamilyDetails();
     }
-  }, [auth, navigate]);
+  }, [auth, navigate, db]);
 
-  const changePassword = () => {
+  const fetchFamilyDetails = async () => {
+    const userRef = doc(db, "Users", auth.currentUser.uid);
+    const userDoc = await getDoc(userRef);
+    if (userDoc.exists() && userDoc.data().familyId) {
+      const familyRef = doc(db, "Families", userDoc.data().familyId);
+      const familyDoc = await getDoc(familyRef);
+      if (familyDoc.exists()) {
+        setFamilyName(familyDoc.data().name);
+        setFamilyId(familyDoc.id);
+        fetchFamilyMembers(familyDoc.id);
+      } else {
+        setFamilyName("No family assigned");
+      }
+    }
+  };
+
+  const fetchFamilyMembers = async (familyId) => {
+    const usersRef = collection(db, "Users");
+    const q = query(usersRef, where("familyId", "==", familyId));
+    const querySnapshot = await getDocs(q);
+    const membersData = querySnapshot.docs.map(doc => doc.data().email);
+    setMembers(membersData);
+  };
+
+  const changePassword = async () => {
     if (auth.currentUser) {
-      updatePassword(auth.currentUser, newPassword).then(() => {
+      try {
+        await updatePassword(auth.currentUser, newPassword);
         alert("Password has been changed.");
-      }).catch((error) => {
+      } catch (error) {
         console.error("Error changing password:", error);
-      });
+        setError("Failed to change password. Please try again.");
+      }
     }
   };
 
-  const handleLogout = () => {
-    signOut(auth).then(() => {
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
       navigate('/');
-    }).catch((error) => {
+    } catch (error) {
       console.error('Error logging out:', error);
-    });
+      setError('Failed to log out. Please try again.');
+    }
   };
 
-  const joinGroup = async () => {
-    if (groupId) {
-      const groupRef = doc(db, "Groups", groupId);
-      const groupDoc = await getDoc(groupRef);
-      if (groupDoc.exists()) {
-        const userRef = doc(db, "Users", auth.currentUser.uid);
-        await updateDoc(userRef, {
-          groupId: groupId
+  const joinFamily = async () => {
+    if (inputFamilyId && !familyId) {
+      const familyRef = doc(db, "Families", inputFamilyId);
+      const familyDoc = await getDoc(familyRef);
+      if (familyDoc.exists()) {
+        await updateDoc(doc(db, "Users", auth.currentUser.uid), {
+          familyId: inputFamilyId
         });
-        setGroupName(groupDoc.data().groupName);
+        setFamilyId(inputFamilyId);
+        setFamilyName(familyDoc.data().name);
+        fetchFamilyMembers(inputFamilyId);
         setError('');
       } else {
-        setError("No group found with this ID");
+        setError("No family found with this ID.");
       }
+    } else {
+      setError("You are already assigned to a family.");
     }
   };
 
@@ -74,17 +93,17 @@ function AccountDetailsPage() {
     <div className="account-details">
       <h1>Account Details</h1>
       <p>Username: {auth.currentUser?.email}</p>
-      <p>Group Name: {groupName}</p>
-      {!groupName && (
+      {familyId ? (
+        <p>Your Family ID: {familyId}</p>
+      ) : (
         <div>
           <input 
             type="text" 
-            value={groupId} 
-            onChange={(e) => setGroupId(e.target.value)} 
-            placeholder="Enter your FamilyID" 
+            value={inputFamilyId} 
+            onChange={(e) => setInputFamilyId(e.target.value)} 
+            placeholder="Enter Family ID" 
           />
-          <button onClick={joinGroup}>Join Group</button>
-          <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>
+          <button onClick={joinFamily}>Join Family</button>
         </div>
       )}
       <div>
@@ -97,6 +116,7 @@ function AccountDetailsPage() {
         <button onClick={changePassword}>Change Password</button>
       </div>
       <button onClick={handleLogout}>Log Out</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }
