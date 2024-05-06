@@ -68,7 +68,18 @@ function CalendarPage() {
         selectable
         onSelectSlot={handleSelectSlot}
         components={{
-          toolbar: CustomToolbar
+          toolbar: props => (
+            <CustomToolbar
+              {...props}
+              onNavigate={(navigate) => {
+                if (navigate === 'PREVIOUS') {
+                  setSelectedDate(moment(selectedDate).subtract(1, view).toDate());
+                } else if (navigate === 'NEXT') {
+                  setSelectedDate(moment(selectedDate).add(1, view).toDate());
+                }
+              }}
+            />
+          )
         }}
         views={['month', 'week', 'day']}
         view={view}
