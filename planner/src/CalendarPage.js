@@ -7,8 +7,9 @@ import { db } from './services/firebase';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CustomToolbar from './components/CustomToolbar';
 import TaskModal from './components/TaskModal';
+import TaskDetailsModal from './components/TaskDetailsModal';
 import { useLocation } from 'react-router-dom';
-import './CalendarPage.css'
+import './CalendarPage.css';
 
 const localizer = momentLocalizer(moment);
 
@@ -19,7 +20,8 @@ function CalendarPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [view, setView] = useState('month');
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedSlotInfo, setSelectedSlotInfo] = useState(null);
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -30,8 +32,8 @@ function CalendarPage() {
 
   useEffect(() => {
     if (location.state?.key) {
-    setView('month');
-    setSelectedDate(new Date());
+      setView('month');
+      setSelectedDate(new Date());
     }
   }, [location.state]);
 
@@ -66,6 +68,11 @@ function CalendarPage() {
     }
   };
 
+  const handleSelectEvent = (event) => {
+    setSelectedTask(event);
+    setDetailsModalOpen(true);
+  };
+
   return (
     <div className="tasks-page">
       <h1>Calendar</h1>
@@ -77,6 +84,7 @@ function CalendarPage() {
         style={{ height: 500 }}
         selectable
         onSelectSlot={handleSelectSlot}
+        onSelectEvent={handleSelectEvent}
         components={{
           toolbar: props => (
             <CustomToolbar
@@ -98,7 +106,13 @@ function CalendarPage() {
       {modalOpen && <TaskModal
         isOpen={modalOpen}
         onRequestClose={() => setModalOpen(false)}
-        slotInfo={selectedSlotInfo}
+        onSubmit={handleSubmit}
+        familyId={familyId}
+      />}
+      {detailsModalOpen && <TaskDetailsModal
+        isOpen={detailsModalOpen}
+        onRequestClose={() => setDetailsModalOpen(false)}
+        task={selectedTask}
       />}
     </div>
   );
