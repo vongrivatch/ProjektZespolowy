@@ -5,6 +5,7 @@ import { getAuth } from 'firebase/auth';
 import { collection, query, where, doc, getDoc, getDocs, addDoc } from 'firebase/firestore';
 import { db } from './services/firebase';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import CustomToolbar from './components/CustomToolbar';
 
 const localizer = momentLocalizer(moment);
 
@@ -44,8 +45,12 @@ function TasksPage() {
     const title = window.prompt('New Event name');
     if (title) {
       const newEvent = { start, end, title, familyId };
-      const docRef = await addDoc(collection(db, "Tasks"), newEvent);
-      setEvents([...events, { ...newEvent, id: docRef.id }]);
+      if (familyId) {
+        const docRef = await addDoc(collection(db, "Tasks"), newEvent);
+        setEvents([...events, { ...newEvent, id: docRef.id }]);
+      } else {
+        alert('You are not assigned to any family. Please join or create a family first.');
+      }
     }
   };
 
@@ -60,6 +65,10 @@ function TasksPage() {
         style={{ height: 500 }}
         selectable
         onSelectSlot={handleSelectSlot}
+        components={{
+          toolbar: CustomToolbar
+        }}
+        views={['month', 'week', 'day']}
       />
     </div>
   );
