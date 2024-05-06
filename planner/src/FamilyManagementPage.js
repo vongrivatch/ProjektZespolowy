@@ -55,10 +55,30 @@ function FamilyManagementPage() {
         } else {
             setError("No family found with this ID.");
         }
-    } else {
-        setError("You are already assigned to a family.");
     }
-};
+  };
+
+  const createFamily = async () => {
+    if (!familyId) {
+      const newFamilyRef = doc(collection(db, "Families"));
+      const newFamilyId = newFamilyRef.id;
+
+      await setDoc(newFamilyRef, {
+        admin: auth.currentUser.uid,
+        members: [auth.currentUser.uid]
+      });
+
+      await updateDoc(doc(db, "Users", auth.currentUser.uid), {
+        familyId: newFamilyId
+      });
+
+      setFamilyId(newFamilyId);
+      setFamilyMembers([auth.currentUser.email]);
+      setError('');
+    } else {
+      setError("You are already assigned to a family.");
+    }
+  };
 
   return (
     <div className="family-management">
@@ -80,6 +100,7 @@ function FamilyManagementPage() {
             placeholder="Enter Family ID"
           />
           <button onClick={joinFamily}>Join Family</button>
+          <button onClick={createFamily}>Create a Family</button>
         </>
       )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
