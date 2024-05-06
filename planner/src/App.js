@@ -12,6 +12,7 @@ import AboutUsPage from './AboutUsPage';
 import ContactUsPage from './ContactUsPage';
 import AccountDetailsPage from './AccountDetailsPage';
 import FamilyManagementPage from './FamilyManagementPage'
+import TasksPage from './TasksPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/account-details" element={<AccountDetailsPage />} />
           <Route path="/family-management" element={<FamilyManagementPage />} />
           <Route path="/account-details" element={<AccountDetailsPage />} />
+          <Route path="/tasks" element={<TasksPage />} />
         </Routes>
         <Footer />
       </div>

@@ -30,6 +30,9 @@ function Navbar() {
         <li><Link to="/contact-us">Contact Us</Link></li>
         {user ? (
           <>
+              <li>
+              <Link to="/tasks">Tasks</Link>
+            </li>
             <li>
               <Link to="/family-management">Family Management</Link>
             </li>
