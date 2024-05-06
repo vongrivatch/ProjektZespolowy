@@ -7,6 +7,7 @@ import { db } from './services/firebase';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CustomToolbar from './components/CustomToolbar';
 import './CalendarPage.css'
+import { useLocation } from 'react-router-dom';
 
 const localizer = momentLocalizer(moment);
 
@@ -16,12 +17,18 @@ function CalendarPage() {
   const [familyId, setFamilyId] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [view, setView] = useState('month');
+  const location = useLocation();
 
   useEffect(() => {
     if (auth.currentUser) {
       fetchFamilyId();
     }
   }, [auth.currentUser]);
+
+  useEffect(() => {
+    setView('month');
+    setSelectedDate(new Date());
+  }, [location.state]);
 
   const fetchFamilyId = async () => {
     const userRef = doc(db, "Users", auth.currentUser.uid);

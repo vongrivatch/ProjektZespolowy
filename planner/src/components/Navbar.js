@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import './Navbar.css';
 
@@ -7,6 +7,10 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
   const auth = getAuth();
+  const navigate = useNavigate();
+  const refreshCalendar = () => {
+    navigate('/calendar', { state: { key: Date.now() } });
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -27,9 +31,9 @@ function Navbar() {
       <ul className={`nav-links ${isOpen ? "active" : ""}`}>
         {user ? (
           <>
-              <li>
-              <Link to="/calendar">Calendar</Link>
-            </li>
+            <nav>
+            <button onClick={refreshCalendar}>Calendar</button>
+            </nav>
             <li>
               <Link to="/family-management">Family Management</Link>
             </li>
