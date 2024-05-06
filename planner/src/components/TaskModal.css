@@ -1,0 +1,26 @@
+.register-form input {
+    padding: 12px 20px;
+    margin-top: 8px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    display: block;
+    width: 109%;
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+    box-sizing: border-box; 
+}
+
+.register-form button {
+    padding: 12px 20px;
+    margin-top: 8px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+}
