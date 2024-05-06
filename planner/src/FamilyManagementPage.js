@@ -108,10 +108,12 @@ function FamilyManagementPage() {
           <p>Your Family ID: {familyId}</p>
           <div>
             <h2>Family Members:</h2>
-            {familyMembers.map((member) => (
-              <div key={member.id} className="member-info">
-                {member.email}
-                {isAdmin && member.id !== auth.currentUser.uid && <button onClick={() => removeMember(member.id)}>❌</button>}
+            {familyMembers.map(member => (
+              <div key={member.id} className="member-item">
+                <p className="member-email">{member.email}</p>
+                {isAdmin && member.id !== auth.currentUser.uid && (
+                  <button onClick={() => removeMember(member.id)} className="remove-member-btn">❌</button>
+                )}
               </div>
             ))}
           </div>

@@ -16,14 +16,12 @@
   line-height: 1.6;
 }
 
-/* Styl dla karuzeli z infografikami */
 .about-us-images img {
   max-width: 100%;
   height: auto;
   margin: 10px 0;
 }
 
-/* Styl dla slidera (karuzeli) */
 .slick-slide {
   outline: none;
 }
@@ -36,7 +34,6 @@
   color: #007bff;
 }
 
-/* Responsive design adjustments */
 @media (max-width: 768px) {
   .about-us p, .about-us ul {
     max-width: 100%;
