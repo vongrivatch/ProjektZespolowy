@@ -6,8 +6,9 @@ import { collection, query, where, doc, getDoc, getDocs, addDoc } from 'firebase
 import { db } from './services/firebase';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CustomToolbar from './components/CustomToolbar';
-import './CalendarPage.css'
+import TaskModal from './components/TaskModal';
 import { useLocation } from 'react-router-dom';
+import './CalendarPage.css'
 
 const localizer = momentLocalizer(moment);
 
@@ -17,6 +18,8 @@ function CalendarPage() {
   const [familyId, setFamilyId] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [view, setView] = useState('month');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedSlotInfo, setSelectedSlotInfo] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -27,8 +30,8 @@ function CalendarPage() {
 
   useEffect(() => {
     if (location.state?.key) {
-      setView('month');
-      setSelectedDate(new Date());
+    setView('month');
+    setSelectedDate(new Date());
     }
   }, [location.state]);
 
@@ -47,15 +50,20 @@ function CalendarPage() {
     const querySnapshot = await getDocs(q);
     const tasksData = querySnapshot.docs.map(doc => ({
       ...doc.data(),
-      start: new Date(doc.data().start.seconds * 1000),
-      end: new Date(doc.data().end.seconds * 1000)
+      start: doc.data().start.toDate(),
+      end: doc.data().end.toDate(),
     }));
     setEvents(tasksData);
   };
 
   const handleSelectSlot = (slotInfo) => {
-    setSelectedDate(slotInfo.start);
-    setView('day');
+    if (view === 'day') {
+      setSelectedSlotInfo(slotInfo);
+      setModalOpen(true);
+    } else {
+      setSelectedDate(slotInfo.start);
+      setView('day');
+    }
   };
 
   return (
@@ -87,6 +95,11 @@ function CalendarPage() {
         view={view}
         date={selectedDate}
       />
+      {modalOpen && <TaskModal
+        isOpen={modalOpen}
+        onRequestClose={() => setModalOpen(false)}
+        slotInfo={selectedSlotInfo}
+      />}
     </div>
   );
 }
