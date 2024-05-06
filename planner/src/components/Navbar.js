@@ -31,9 +31,9 @@ function Navbar() {
       <ul className={`nav-links ${isOpen ? "active" : ""}`}>
         {user ? (
           <>
-            <nav>
-            <button onClick={refreshCalendar}>Calendar</button>
-            </nav>
+            <li>
+              <button onClick={refreshCalendar} className="nav-button">Calendar</button> {/* Dodanie klasy nav-button */}
+            </li>
             <li>
               <Link to="/family-management">Family Management</Link>
             </li>

@@ -38,13 +38,27 @@
     color: #007bff;
 }
 
+.nav-links .nav-button {
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-size: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links .nav-button:hover {
+    color: #007bff;
+}
+
 @media screen and (max-width: 768px) {
     .menu-icon {
         display: block;
         cursor: pointer;
     }
 
-    .nav-links {
+    .nav-links .nav-button {
         position: absolute;
         right: 0;
         top: 60px;
