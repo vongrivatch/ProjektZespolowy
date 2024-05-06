@@ -6,13 +6,16 @@ import { collection, query, where, doc, getDoc, getDocs, addDoc } from 'firebase
 import { db } from './services/firebase';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CustomToolbar from './components/CustomToolbar';
+import './CalendarPage.css'
 
 const localizer = momentLocalizer(moment);
 
-function TasksPage() {
+function CalendarPage() {
   const auth = getAuth();
   const [events, setEvents] = useState([]);
   const [familyId, setFamilyId] = useState('');
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [view, setView] = useState('month');
 
   useEffect(() => {
     if (auth.currentUser) {
@@ -41,22 +44,14 @@ function TasksPage() {
     setEvents(tasksData);
   };
 
-  const handleSelectSlot = async ({ start, end }) => {
-    const title = window.prompt('New Event name');
-    if (title) {
-      const newEvent = { start, end, title, familyId };
-      if (familyId) {
-        const docRef = await addDoc(collection(db, "Tasks"), newEvent);
-        setEvents([...events, { ...newEvent, id: docRef.id }]);
-      } else {
-        alert('You are not assigned to any family. Please join or create a family first.');
-      }
-    }
+  const handleSelectSlot = (slotInfo) => {
+    setSelectedDate(slotInfo.start);
+    setView('day');
   };
 
   return (
     <div className="tasks-page">
-      <h1>Task Scheduler</h1>
+      <h1>Calendar</h1>
       <Calendar
         localizer={localizer}
         events={events}
@@ -69,9 +64,11 @@ function TasksPage() {
           toolbar: CustomToolbar
         }}
         views={['month', 'week', 'day']}
+        view={view}
+        date={selectedDate}
       />
     </div>
   );
 }
 
-export default TasksPage;
+export default CalendarPage;

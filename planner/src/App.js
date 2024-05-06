@@ -12,7 +12,7 @@ import AboutUsPage from './AboutUsPage';
 import ContactUsPage from './ContactUsPage';
 import AccountDetailsPage from './AccountDetailsPage';
 import FamilyManagementPage from './FamilyManagementPage'
-import TasksPage from './TasksPage';
+import CalendarPage from './CalendarPage';
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
           <Route path="/account-details" element={<AccountDetailsPage />} />
           <Route path="/family-management" element={<FamilyManagementPage />} />
           <Route path="/account-details" element={<AccountDetailsPage />} />
-          <Route path="/tasks" element={<TasksPage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
         </Routes>
         <Footer />
       </div>
