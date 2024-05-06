@@ -26,8 +26,10 @@ function CalendarPage() {
   }, [auth.currentUser]);
 
   useEffect(() => {
-    setView('month');
-    setSelectedDate(new Date());
+    if (location.state?.key) {
+      setView('month');
+      setSelectedDate(new Date());
+    }
   }, [location.state]);
 
   const fetchFamilyId = async () => {
@@ -45,8 +47,8 @@ function CalendarPage() {
     const querySnapshot = await getDocs(q);
     const tasksData = querySnapshot.docs.map(doc => ({
       ...doc.data(),
-      start: doc.data().start.toDate(),
-      end: doc.data().end.toDate(),
+      start: new Date(doc.data().start.seconds * 1000),
+      end: new Date(doc.data().end.seconds * 1000)
     }));
     setEvents(tasksData);
   };
