@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import './TaskModal.css'
+import './TaskModal.css';
 
 const customModalStyles = {
   content: {
@@ -10,7 +10,7 @@ const customModalStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    width: '300px',
+    width: '600px',
     maxWidth: '90%',
     border: '2px solid #ccc',
     borderRadius: '8px',
@@ -92,7 +92,7 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
         <button type="button" onClick={handleSubmit}>Create Task</button>
       </form>
     </Modal>
-  );  
+  );
 }
 
 export default TaskModal;

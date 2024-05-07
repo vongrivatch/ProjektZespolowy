@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, doc, getDoc, getDocs } from 'firebase/firestore';
+import { collection, query, where, doc, getDoc, getDocs, addDoc, updateDoc, Timestamp } from 'firebase/firestore';
 import { db } from './services/firebase';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CustomToolbar from './components/CustomToolbar';
@@ -50,17 +50,29 @@ function CalendarPage() {
     const tasksRef = collection(db, "Tasks");
     const q = query(tasksRef, where("familyId", "==", familyId));
     const querySnapshot = await getDocs(q);
-    const tasksData = querySnapshot.docs.map(doc => ({
-      ...doc.data(),
-      start: doc.data().start.toDate(),
-      end: doc.data().end.toDate(),
-    }));
+    const tasksData = querySnapshot.docs.map(doc => {
+      const data = doc.data();
+      const start = data.start instanceof Timestamp ? data.start.toDate() : data.start;
+      const end = data.end instanceof Timestamp ? data.end.toDate() : data.end;
+      return {
+        ...data,
+        id: doc.id,
+        start,
+        end,
+      };
+    });
     setEvents(tasksData);
   };
 
   const handleSelectSlot = (slotInfo) => {
     if (view === 'day') {
-      setSelectedSlotInfo(slotInfo);
+      setSelectedTask({
+        title: '',
+        start: slotInfo.start,
+        end: slotInfo.start,
+        description: '',
+        status: 'To do'
+      });
       setModalOpen(true);
     } else {
       setSelectedDate(slotInfo.start);
@@ -71,6 +83,28 @@ function CalendarPage() {
   const handleSelectEvent = (event) => {
     setSelectedTask(event);
     setDetailsModalOpen(true);
+  };
+
+  const handleSubmit = async (task) => {
+    const { title, start, end, description, status, familyId } = task;
+    const newEvent = {
+      title,
+      start: Timestamp.fromDate(new Date(start)),
+      end: Timestamp.fromDate(new Date(end)),
+      description,
+      status,
+      familyId
+    };
+    const docRef = await addDoc(collection(db, "Tasks"), newEvent);
+    fetchTasks(familyId);
+    setModalOpen(false);
+  };
+
+  const handleUpdate = async (taskId, updatedFields) => {
+    const taskRef = doc(db, "Tasks", taskId);
+    await updateDoc(taskRef, updatedFields);
+    fetchTasks(familyId);
+    setDetailsModalOpen(false);
   };
 
   return (
@@ -113,6 +147,7 @@ function CalendarPage() {
         isOpen={detailsModalOpen}
         onRequestClose={() => setDetailsModalOpen(false)}
         task={selectedTask}
+        onUpdate={handleUpdate}
       />}
     </div>
   );

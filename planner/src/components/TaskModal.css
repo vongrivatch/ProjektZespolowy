@@ -1,13 +1,14 @@
-.register-form input {
+.register-form {
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 600px;
     margin: auto;
     background: #ffffff;
-    margin-top: 10px;
-    padding: 2px;
 }
 
+.register-form input,
+.register-form select,
+.register-form textarea,
 .register-form button {
     padding: 12px 20px;
     margin-top: 8px;
@@ -15,10 +16,31 @@
     border-radius: 4px;
     display: block;
     width: 100%;
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.register-form button {
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
-    font-family: 'Arial', sans-serif;
-    font-size: 1em;
+}
+
+.register-form button:hover {
+    background-color: #45a049;
+}
+
+.register-form label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.register-form .input-group {
+    margin-bottom: 20px;
+}
+
+.register-form .text-area-style {
+    resize: none;
 }
