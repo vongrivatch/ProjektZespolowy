@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import './TaskModal.css';
 
@@ -26,29 +26,25 @@ const customModalStyles = {
 
 Modal.setAppElement('#root');
 
-function TaskModal({ isOpen, onRequestClose, onSubmit, selectedTask, familyId }) {
+function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
   const [title, setTitle] = useState('');
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [description, setDescription] = useState('');
-
-  useEffect(() => {
-    if (isOpen) {
-      setTitle(selectedTask ? selectedTask.title : '');
-      setStart(selectedTask ? selectedTask.start.toISOString().slice(0, 16) : '');
-      setEnd(selectedTask && selectedTask.end ? selectedTask.end.toISOString().slice(0, 16) : '');
-      setDescription(selectedTask ? selectedTask.description : '');
-    }
-  }, [isOpen, selectedTask]);
+  const [error, setError] = useState('');
 
   const handleSubmit = () => {
-    const endFinal = end || new Date(start);
-    endFinal.setHours(23, 59, 59, 999);
+    if (!start || !title) {
+      setError('Please fill in all required fields.');
+      return;
+    }
 
+    const endFinal = end || new Date(start).setHours(23, 59, 59, 999);
+    
     onSubmit({
       title,
       start: new Date(start),
-      end: endFinal,
+      end: new Date(endFinal),
       description,
       status: 'To do',
       familyId
@@ -63,6 +59,7 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, selectedTask, familyId })
       style={customModalStyles}
     >
       <h2>Create New Task</h2>
+      {error && <p style={{color: 'red'}}>{error}</p>}
       <form className="register-form">
         <div className="input-group">
           <label>Task Title:</label>
@@ -70,6 +67,7 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, selectedTask, familyId })
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Task Title"
+            required
           />
         </div>
         <div className="input-group">
@@ -79,6 +77,7 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, selectedTask, familyId })
             value={start}
             onChange={e => setStart(e.target.value)}
             placeholder="Start Time"
+            required
           />
         </div>
         <div className="input-group">
