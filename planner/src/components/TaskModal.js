@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import './TaskModal.css';
 
@@ -26,21 +26,31 @@ const customModalStyles = {
 
 Modal.setAppElement('#root');
 
-function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
+function TaskModal({ isOpen, onRequestClose, onSubmit, selectedTask, familyId }) {
   const [title, setTitle] = useState('');
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [description, setDescription] = useState('');
-  const status = 'To do';
+
+  useEffect(() => {
+    if (isOpen) {
+      setTitle(selectedTask ? selectedTask.title : '');
+      setStart(selectedTask ? selectedTask.start.toISOString().slice(0, 16) : '');
+      setEnd(selectedTask && selectedTask.end ? selectedTask.end.toISOString().slice(0, 16) : '');
+      setDescription(selectedTask ? selectedTask.description : '');
+    }
+  }, [isOpen, selectedTask]);
 
   const handleSubmit = () => {
-    const endFinal = end || new Date(start).setHours(23, 59, 59, 999);
+    const endFinal = end || new Date(start);
+    endFinal.setHours(23, 59, 59, 999);
+
     onSubmit({
       title,
-      start,
+      start: new Date(start),
       end: endFinal,
       description,
-      status,
+      status: 'To do',
       familyId
     });
     onRequestClose();
@@ -58,7 +68,7 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
           <label>Task Title:</label>
           <input
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={e => setTitle(e.target.value)}
             placeholder="Task Title"
           />
         </div>
@@ -67,7 +77,7 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
           <input
             type="datetime-local"
             value={start}
-            onChange={(e) => setStart(e.target.value)}
+            onChange={e => setStart(e.target.value)}
             placeholder="Start Time"
           />
         </div>
@@ -76,7 +86,7 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
           <input
             type="datetime-local"
             value={end}
-            onChange={(e) => setEnd(e.target.value)}
+            onChange={e => setEnd(e.target.value)}
             placeholder="End Time (optional)"
           />
         </div>
@@ -85,7 +95,7 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
           <input
             type="text"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={e => setDescription(e.target.value)}
             placeholder="Additional description (optional)"
           />
         </div>

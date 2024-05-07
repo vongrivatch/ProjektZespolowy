@@ -50,26 +50,39 @@ function CalendarPage() {
     const tasksRef = collection(db, "Tasks");
     const q = query(tasksRef, where("familyId", "==", familyId));
     const querySnapshot = await getDocs(q);
-    const tasksData = querySnapshot.docs.map(doc => {
-      const data = doc.data();
-      const start = data.start instanceof Timestamp ? data.start.toDate() : data.start;
-      const end = data.end instanceof Timestamp ? data.end.toDate() : data.end;
-      return {
-        ...data,
-        id: doc.id,
-        start,
-        end,
-      };
-    });
+    const tasksData = querySnapshot.docs.map(doc => ({
+      ...doc.data(),
+      start: doc.data().start.toDate(),
+      end: doc.data().end.toDate(),
+      id: doc.id,
+    }));
     setEvents(tasksData);
+  };
+
+  const eventStyleGetter = (event) => {
+    const statusColor = {
+      'To do': '#3174ad',
+      'In progress': '#f0ad4e',
+      'Done': '#5cb85c',
+      'Declined': '#d9534f'
+    };
+    return {
+      style: {
+        backgroundColor: statusColor[event.status] || '#3174ad'
+      }
+    };
   };
 
   const handleSelectSlot = (slotInfo) => {
     if (view === 'day') {
+      const newTaskStart = new Date(slotInfo.start);
+      const newTaskEnd = new Date(slotInfo.start);
+      newTaskEnd.setHours(23, 59, 59, 999);
+
       setSelectedTask({
         title: '',
-        start: slotInfo.start,
-        end: slotInfo.start,
+        start: newTaskStart,
+        end: newTaskEnd,
         description: '',
         status: 'To do'
       });
@@ -86,16 +99,13 @@ function CalendarPage() {
   };
 
   const handleSubmit = async (task) => {
-    const { title, start, end, description, status, familyId } = task;
     const newEvent = {
-      title,
-      start: Timestamp.fromDate(new Date(start)),
-      end: Timestamp.fromDate(new Date(end)),
-      description,
-      status,
+      ...task,
+      start: Timestamp.fromDate(new Date(task.start)),
+      end: Timestamp.fromDate(new Date(task.end)),
       familyId
     };
-    const docRef = await addDoc(collection(db, "Tasks"), newEvent);
+    await addDoc(collection(db, "Tasks"), newEvent);
     fetchTasks(familyId);
     setModalOpen(false);
   };
@@ -119,19 +129,9 @@ function CalendarPage() {
         selectable
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectEvent}
+        eventPropGetter={eventStyleGetter}
         components={{
-          toolbar: props => (
-            <CustomToolbar
-              {...props}
-              onNavigate={(navigate) => {
-                if (navigate === 'PREVIOUS') {
-                  setSelectedDate(moment(selectedDate).subtract(1, view).toDate());
-                } else if (navigate === 'NEXT') {
-                  setSelectedDate(moment(selectedDate).add(1, view).toDate());
-                }
-              }}
-            />
-          )
+          toolbar: CustomToolbar
         }}
         views={['month', 'week', 'day']}
         view={view}
