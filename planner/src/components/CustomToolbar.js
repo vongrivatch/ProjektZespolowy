@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navigate } from 'react-big-calendar';
 
 const CustomToolbar = ({ label, onNavigate }) => {
   const goToBack = () => {
