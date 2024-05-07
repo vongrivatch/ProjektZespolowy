@@ -3,13 +3,22 @@
   flex-direction: column;
   max-width: 400px;
   margin: auto;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  border-radius: 8px;
   background: #ffffff;
+  margin-top: 10px;
+  padding: 2px;
 }
 
-.account-details input,
+.account-details input{
+  padding: 12px 20px;
+  margin-top: 8px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: block;
+  width: 94%;
+  font-family: 'Arial', sans-serif;
+  font-size: 1em;
+}
+
 .account-details button {
   padding: 12px 20px;
   margin-top: 8px;
@@ -30,11 +39,6 @@
 
 .account-details button:hover {
   background-color: #45a049;
-}
-
-.account-details input {
-  margin-bottom: 10px;
-  width: 94%;
 }
 
 .account-details a {

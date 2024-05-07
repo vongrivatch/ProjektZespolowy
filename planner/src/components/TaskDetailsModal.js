@@ -3,26 +3,27 @@ import Modal from 'react-modal';
 import './TaskModal.css';
 
 const customModalStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      width: '600px',
-      maxWidth: '90%',
-      border: '2px solid #ccc',
-      borderRadius: '8px',
-      background: '#ffffff',
-      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-      padding: '20px',
-      overflow: 'auto',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
-    },
-  };
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '600px', 
+    maxWidth: '90%',
+    border: '2px solid #ccc',
+    borderRadius: '8px',
+    background: '#ffffff',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    padding: '20px',
+    overflow: 'auto', 
+    display: 'flex', 
+    flexDirection: 'column',
+    alignItems: 'center',
+    zIndex: 1000
+  },
+};
 
 Modal.setAppElement('#root');
 
