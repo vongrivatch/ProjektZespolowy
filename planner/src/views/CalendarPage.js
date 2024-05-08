@@ -131,28 +131,30 @@ function CalendarPage() {
         onSelectEvent={handleSelectEvent}
         eventPropGetter={eventStyleGetter}
         components={{
-          toolbar: props => (
-            <CustomToolbar
-              {...props}
-            />
-          )
+          toolbar: CustomToolbar
         }}
         views={['month', 'week', 'day']}
         view={view}
         date={selectedDate}
+        onView={setView}
+        onNavigate={setSelectedDate}
       />
-      {modalOpen && <TaskModal
-        isOpen={modalOpen}
-        onRequestClose={() => setModalOpen(false)}
-        onSubmit={handleSubmit}
-        familyId={familyId}
-      />}
-      {detailsModalOpen && <TaskDetailsModal
-        isOpen={detailsModalOpen}
-        onRequestClose={() => setDetailsModalOpen(false)}
-        task={selectedTask}
-        onUpdate={handleUpdate}
-      />}
+      {modalOpen && (
+        <TaskModal
+          isOpen={modalOpen}
+          onRequestClose={() => setModalOpen(false)}
+          onSubmit={handleSubmit}
+          familyId={familyId}
+        />
+      )}
+      {detailsModalOpen && (
+        <TaskDetailsModal
+          isOpen={detailsModalOpen}
+          onRequestClose={() => setDetailsModalOpen(false)}
+          task={selectedTask}
+          onUpdate={handleUpdate}
+        />
+      )}
     </div>
   );
 }
