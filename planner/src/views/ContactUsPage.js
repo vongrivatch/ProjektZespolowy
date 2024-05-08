@@ -14,7 +14,8 @@ function ContactUs() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    const mailtoLink = `mailto:mactro96@o2.pl?subject=${formData.subject}&body=Name: ${formData.name}%0AMessage: ${formData.message}`;
+    window.location.href = mailtoLink;
   };
 
   return (
@@ -30,11 +31,11 @@ function ContactUs() {
           required
         />
         <input
-          type="email"
-          name="email"
-          value={formData.email}
+          type="text"
+          name="subject"
+          value={formData.subject}
           onChange={handleChange}
-          placeholder="Your Email"
+          placeholder="Subject"
           required
         />
         <textarea
