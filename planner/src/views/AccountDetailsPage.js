@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, updatePassword, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import './AccountDetailsPage.css';
 
@@ -9,9 +9,7 @@ function AccountDetailsPage() {
   const auth = getAuth();
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState('');
-  const [familyName, setFamilyName] = useState('');
   const [familyId, setFamilyId] = useState('');
-  const [members, setMembers] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -20,30 +18,14 @@ function AccountDetailsPage() {
     } else {
       fetchFamilyDetails();
     }
-  }, [auth, navigate, db]);
+  }, [auth, navigate]);
 
   const fetchFamilyDetails = async () => {
     const userRef = doc(db, "Users", auth.currentUser.uid);
     const userDoc = await getDoc(userRef);
     if (userDoc.exists() && userDoc.data().familyId) {
-      const familyRef = doc(db, "Families", userDoc.data().familyId);
-      const familyDoc = await getDoc(familyRef);
-      if (familyDoc.exists()) {
-        setFamilyName(familyDoc.data().name);
-        setFamilyId(familyDoc.id);
-        fetchFamilyMembers(familyDoc.id);
-      } else {
-        setFamilyName("No family assigned");
-      }
+      setFamilyId(userDoc.data().familyId);
     }
-  };
-
-  const fetchFamilyMembers = async (familyId) => {
-    const usersRef = collection(db, "Users");
-    const q = query(usersRef, where("familyId", "==", familyId));
-    const querySnapshot = await getDocs(q);
-    const membersData = querySnapshot.docs.map(doc => doc.data().email);
-    setMembers(membersData);
   };
 
   const changePassword = async () => {
@@ -72,11 +54,7 @@ function AccountDetailsPage() {
     <div className="account-details">
       <h1>Account Details</h1>
       <p>Username: {auth.currentUser?.email}</p>
-      {familyId && (
-        <>
-          <p>Your Family ID: {familyId}</p>
-        </>
-      )}
+      {familyId && <p>Your Family ID: {familyId}</p>}
       <div>
         <input 
           type="password" 

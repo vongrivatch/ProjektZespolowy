@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 import './TaskModal.css';
 
 const customModalStyles = {
@@ -10,15 +11,15 @@ const customModalStyles = {
     bottom: 'auto',
     marginRight: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '600px', 
+    width: '600px',
     maxWidth: '90%',
     border: '2px solid #ccc',
     borderRadius: '8px',
     background: '#ffffff',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     padding: '20px',
-    overflow: 'auto', 
-    display: 'flex', 
+    overflow: 'auto',
+    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
   },
@@ -90,5 +91,20 @@ function TaskDetailsModal({ isOpen, onRequestClose, task, onUpdate }) {
     </Modal>
   );
 }
+
+TaskDetailsModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
+  task: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    start: PropTypes.instanceOf(Date).isRequired,
+    end: PropTypes.instanceOf(Date).isRequired,
+    status: PropTypes.string.isRequired,
+    comment: PropTypes.string,
+    description: PropTypes.string.isRequired
+  }).isRequired,
+  onUpdate: PropTypes.func.isRequired
+};
 
 export default TaskDetailsModal;

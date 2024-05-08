@@ -131,7 +131,11 @@ function CalendarPage() {
         onSelectEvent={handleSelectEvent}
         eventPropGetter={eventStyleGetter}
         components={{
-          toolbar: CustomToolbar
+          toolbar: props => (
+            <CustomToolbar
+              {...props}
+            />
+          )
         }}
         views={['month', 'week', 'day']}
         view={view}

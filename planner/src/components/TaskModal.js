@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 import './TaskModal.css';
 
 const customModalStyles = {
@@ -103,5 +104,12 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
     </Modal>
   );
 }
+
+TaskModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  familyId: PropTypes.string.isRequired
+};
 
 export default TaskModal;
