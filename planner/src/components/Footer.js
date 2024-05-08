@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>© 2023 Julia Grzywacz & Maciej Trojan. All rights reserved.</p>
+        <p>© 2023-2024  Maciej Trojan. All rights reserved.</p>
         <div className="social-media">
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-facebook-f"></i>

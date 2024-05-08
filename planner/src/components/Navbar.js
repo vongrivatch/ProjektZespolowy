@@ -34,6 +34,8 @@ function Navbar() {
             <li>
               <button onClick={refreshCalendar} className="nav-button">Calendar</button>
             </li>
+            <li><Link to="/about-us">About Us</Link></li>
+            <li><Link to="/contact-us">Contact Us</Link></li>
             <li>
               <Link to="/family-management">Family Management</Link>
             </li>

@@ -3,11 +3,11 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { getAuth } from 'firebase/auth';
 import { collection, query, where, doc, getDoc, getDocs, addDoc, updateDoc, Timestamp } from 'firebase/firestore';
-import { db } from './services/firebase';
+import { db } from '../services/firebase';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import CustomToolbar from './components/CustomToolbar';
-import TaskModal from './components/TaskModal';
-import TaskDetailsModal from './components/TaskDetailsModal';
+import CustomToolbar from '../components/CustomToolbar';
+import TaskModal from '../components/TaskModal';
+import TaskDetailsModal from '../components/TaskDetailsModal';
 import { useLocation } from 'react-router-dom';
 import './CalendarPage.css';
 
