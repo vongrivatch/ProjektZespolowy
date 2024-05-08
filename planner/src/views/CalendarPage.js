@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, doc, getDoc, getDocs, addDoc, updateDoc, Timestamp } from 'firebase/firestore';
+import { collection, query, where, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CustomToolbar from '../components/CustomToolbar';
 import TaskModal from '../components/TaskModal';
 import TaskDetailsModal from '../components/TaskDetailsModal';
-import { useLocation } from 'react-router-dom';
 import './CalendarPage.css';
 
 const localizer = momentLocalizer(moment);
@@ -22,20 +21,12 @@ function CalendarPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
-  const location = useLocation();
 
   useEffect(() => {
     if (auth.currentUser) {
       fetchFamilyId();
     }
   }, [auth.currentUser]);
-
-  useEffect(() => {
-    if (location.state?.key) {
-      setView('month');
-      setSelectedDate(new Date());
-    }
-  }, [location.state]);
 
   const fetchFamilyId = async () => {
     const userRef = doc(db, "Users", auth.currentUser.uid);
@@ -50,13 +41,14 @@ function CalendarPage() {
     const tasksRef = collection(db, "Tasks");
     const q = query(tasksRef, where("familyId", "==", familyId));
     const querySnapshot = await getDocs(q);
-    const tasksData = querySnapshot.docs.map(doc => ({
+    const tasks = querySnapshot.docs.map(doc => ({
       ...doc.data(),
       start: doc.data().start.toDate(),
       end: doc.data().end.toDate(),
       id: doc.id,
+      status: doc.data().status
     }));
-    setEvents(tasksData);
+    setEvents(tasks);
   };
 
   const eventStyleGetter = (event) => {
@@ -76,16 +68,8 @@ function CalendarPage() {
   const handleSelectSlot = (slotInfo) => {
     if (view === 'day') {
       const newTaskStart = new Date(slotInfo.start);
-      const newTaskEnd = new Date(slotInfo.start);
-      newTaskEnd.setHours(23, 59, 59, 999);
-
-      setSelectedTask({
-        title: '',
-        start: newTaskStart,
-        end: newTaskEnd,
-        description: '',
-        status: 'To do'
-      });
+      newTaskStart.setHours(0, 0, 0, 0);
+      setSelectedTask({ start: newTaskStart });
       setModalOpen(true);
     } else {
       setSelectedDate(slotInfo.start);
@@ -96,25 +80,6 @@ function CalendarPage() {
   const handleSelectEvent = (event) => {
     setSelectedTask(event);
     setDetailsModalOpen(true);
-  };
-
-  const handleSubmit = async (task) => {
-    const newEvent = {
-      ...task,
-      start: Timestamp.fromDate(new Date(task.start)),
-      end: Timestamp.fromDate(new Date(task.end)),
-      familyId
-    };
-    await addDoc(collection(db, "Tasks"), newEvent);
-    fetchTasks(familyId);
-    setModalOpen(false);
-  };
-
-  const handleUpdate = async (taskId, updatedFields) => {
-    const taskRef = doc(db, "Tasks", taskId);
-    await updateDoc(taskRef, updatedFields);
-    fetchTasks(familyId);
-    setDetailsModalOpen(false);
   };
 
   return (
@@ -130,9 +95,7 @@ function CalendarPage() {
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectEvent}
         eventPropGetter={eventStyleGetter}
-        components={{
-          toolbar: CustomToolbar
-        }}
+        components={{ toolbar: CustomToolbar }}
         views={['month', 'week', 'day']}
         view={view}
         date={selectedDate}
@@ -143,8 +106,9 @@ function CalendarPage() {
         <TaskModal
           isOpen={modalOpen}
           onRequestClose={() => setModalOpen(false)}
-          onSubmit={handleSubmit}
+          onSubmit={() => {}}
           familyId={familyId}
+          selectedTask={selectedTask}
         />
       )}
       {detailsModalOpen && (
@@ -152,7 +116,7 @@ function CalendarPage() {
           isOpen={detailsModalOpen}
           onRequestClose={() => setDetailsModalOpen(false)}
           task={selectedTask}
-          onUpdate={handleUpdate}
+          onUpdate={() => {}}
         />
       )}
     </div>

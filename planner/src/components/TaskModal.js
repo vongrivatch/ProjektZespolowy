@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import './TaskModal.css';
@@ -27,12 +27,21 @@ const customModalStyles = {
 
 Modal.setAppElement('#root');
 
-function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
+function TaskModal({ isOpen, onRequestClose, onSubmit, familyId, selectedTask }) {
   const [title, setTitle] = useState('');
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (selectedTask && selectedTask.start) {
+      const offset = selectedTask.start.getTimezoneOffset() * 60000;
+      const localISOTime = (new Date(selectedTask.start - offset)).toISOString().slice(0, 16);
+      setStart(localISOTime);
+      setEnd('');
+    }
+  }, [selectedTask]);
 
   const handleSubmit = () => {
     if (!start || !title) {
@@ -40,12 +49,13 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
       return;
     }
 
-    const endFinal = end || new Date(start).setHours(23, 59, 59, 999);
-    
+    const startDateTime = new Date(start);
+    const endDateTime = end ? new Date(end) : new Date(startDateTime.getTime() + 86400000 - 1);
+
     onSubmit({
       title,
-      start: new Date(start),
-      end: new Date(endFinal),
+      start: startDateTime,
+      end: endDateTime,
       description,
       status: 'To do',
       familyId
@@ -64,40 +74,19 @@ function TaskModal({ isOpen, onRequestClose, onSubmit, familyId }) {
       <form className="register-form">
         <div className="input-group">
           <label>Task Title:</label>
-          <input
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            placeholder="Task Title"
-            required
-          />
+          <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Task Title" required />
         </div>
         <div className="input-group">
           <label>Start Time:</label>
-          <input
-            type="datetime-local"
-            value={start}
-            onChange={e => setStart(e.target.value)}
-            placeholder="Start Time"
-            required
-          />
+          <input type="datetime-local" value={start} onChange={e => setStart(e.target.value)} placeholder="Start Time" required />
         </div>
         <div className="input-group">
           <label>End Time:</label>
-          <input
-            type="datetime-local"
-            value={end}
-            onChange={e => setEnd(e.target.value)}
-            placeholder="End Time (optional)"
-          />
+          <input type="datetime-local" value={end} onChange={e => setEnd(e.target.value)} placeholder="End Time (optional)" />
         </div>
         <div className="input-group">
           <label>Description:</label>
-          <input
-            type="text"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            placeholder="Additional description (optional)"
-          />
+          <input type="text" value={description} onChange={e => setDescription(e.target.value)} placeholder="Additional description (optional)" />
         </div>
         <button type="button" onClick={handleSubmit}>Create Task</button>
       </form>
@@ -109,7 +98,8 @@ TaskModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  familyId: PropTypes.string.isRequired
+  familyId: PropTypes.string.isRequired,
+  selectedTask: PropTypes.object.isRequired
 };
 
 export default TaskModal;

@@ -41,7 +41,6 @@ function TaskDetailsModal({ isOpen, onRequestClose, task, onUpdate }) {
       onRequestClose();
     }
   };
-  
 
   return (
     <Modal
