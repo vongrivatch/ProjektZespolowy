@@ -1,17 +1,17 @@
 .home-page {
   position: relative;
   padding: 20px;
-  text-align: center; /* Wyśrodkowanie treści */
-  background-color: #fff; /* Zachowanie białego tła */
-  color: #333; /* Ustawienie koloru tekstu na ciemniejszy dla lepszej czytelności */
+  text-align: center;
+  background-color: #fff;
+  color: #333;
 }
 
 .intro-text {
-  max-width: 600px; /* Ograniczenie szerokości tekstu */
-  margin: 0 auto; /* Wyśrodkowanie bloku tekstu */
-  font-size: 18px; /* Zwiększenie rozmiaru czcionki */
-  line-height: 1.6; /* Ustawienie interlinii dla lepszej czytelności */
-  color: #666; /* Ustawienie jaśniejszego koloru tekstu */
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #666;
 }
 
 .action-buttons {
@@ -29,7 +29,7 @@
 }
 
 .primary-btn {
-  background-color: #4CAF50; /* Zielony kolor dla przycisku głównego */
+  background-color: #4CAF50;
 }
 
 .primary-btn:hover {
@@ -37,7 +37,7 @@
 }
 
 .secondary-btn {
-  background-color: #008CBA; /* Niebieski kolor dla przycisku wtórnego */
+  background-color: #008CBA;
 }
 
 .secondary-btn:hover {

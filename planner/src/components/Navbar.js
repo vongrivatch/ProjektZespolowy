@@ -32,7 +32,7 @@ function Navbar() {
         {user ? (
           <>
             <li>
-              <button onClick={refreshCalendar} className="nav-button">Calendar</button> {/* Dodanie klasy nav-button */}
+              <button onClick={refreshCalendar} className="nav-button">Calendar</button>
             </li>
             <li>
               <Link to="/family-management">Family Management</Link>
