@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, doc, getDoc, getDocs, addDoc, updateDoc, Timestamp } from 'firebase/firestore';
+import { collection, query, where, doc, getDoc, getDocs, addDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CustomToolbar from '../components/CustomToolbar';
