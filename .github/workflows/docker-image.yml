@@ -24,4 +24,4 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Push the Docker image
-      run: docker push mamool/PurrfectPlanner:${{ github.sha }}
+      run: docker push mamool/planner:${{ github.sha }}
