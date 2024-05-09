@@ -47,7 +47,7 @@ function RegisterPage() {
       <h1>Register</h1>
       {error && (
         <div style={{ color: 'red' }}>
-          {error} {error.includes('This email address is already in use') && <Link to="/forgot-password">Click here</Link>}
+          {error} {error.includes('This email address is already in use') && <Link to="/login">Click here</Link>}
         </div>
       )}
       <form onSubmit={handleRegister}>
