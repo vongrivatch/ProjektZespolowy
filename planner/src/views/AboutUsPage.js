@@ -41,9 +41,7 @@ function AboutUsPage() {
       <h3>Features That Make Managing Tasks Exciting</h3>
       <ul>
         <li><strong>Shared Task Lists:</strong> Create and manage tasks collectively. Everyone can add, complete, and review tasks, ensuring nothing is overlooked.</li>
-        <li><strong>Customizable Alerts:</strong> Set reminders for individual tasks or events, so every family member stays informed and prepared.</li>
         <li><strong>Family Calendar:</strong> View all family events and tasks in one place. Plan ahead with a calendar designed to support the whole family&apos;s schedule.</li>
-        <li><strong>Real-Time Notifications:</strong> Get instant updates when tasks are added or completed, and when changes are made to the schedule.</li>
       </ul>
 
       <h3>Join Us Today!</h3>
