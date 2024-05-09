@@ -2,7 +2,8 @@ FROM node:20 AS build
 
 WORKDIR /app
 
-COPY planner/package*.json
+COPY planner/src/package*.json ./
+
 RUN npm install
 
 COPY planner ./
