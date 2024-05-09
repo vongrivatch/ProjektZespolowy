@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { getAuth } from 'firebase/auth';
-import { collection, query, where, doc, getDoc, getDocs } from 'firebase/firestore';
+import { collection, query, where, doc, getDoc, getDocs, addDoc, updateDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CustomToolbar from '../components/CustomToolbar';
@@ -51,18 +51,17 @@ function CalendarPage() {
     setEvents(tasks);
   };
 
-  const eventStyleGetter = (event) => {
-    const statusColor = {
-      'To do': '#3174ad',
-      'In progress': '#f0ad4e',
-      'Done': '#5cb85c',
-      'Declined': '#d9534f'
-    };
-    return {
-      style: {
-        backgroundColor: statusColor[event.status] || '#3174ad'
-      }
-    };
+  const handleSubmit = async (task) => {
+    await addDoc(collection(db, "Tasks"), task);
+    fetchTasks(familyId);
+    setModalOpen(false);
+  };
+
+  const handleUpdate = async (taskId, updatedFields) => {
+    const taskRef = doc(db, "Tasks", taskId);
+    await updateDoc(taskRef, updatedFields);
+    fetchTasks(familyId);
+    setDetailsModalOpen(false);
   };
 
   const handleSelectSlot = (slotInfo) => {
@@ -94,7 +93,11 @@ function CalendarPage() {
         selectable
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectEvent}
-        eventPropGetter={eventStyleGetter}
+        eventPropGetter={(event) => ({
+          style: {
+            backgroundColor: ['#3174ad', '#f0ad4e', '#5cb85c', '#d9534f'][['To do', 'In progress', 'Done', 'Declined'].indexOf(event.status)]
+          }
+        })}
         components={{ toolbar: CustomToolbar }}
         views={['month', 'week', 'day']}
         view={view}
@@ -106,7 +109,7 @@ function CalendarPage() {
         <TaskModal
           isOpen={modalOpen}
           onRequestClose={() => setModalOpen(false)}
-          onSubmit={() => {}}
+          onSubmit={handleSubmit}
           familyId={familyId}
           selectedTask={selectedTask}
         />
@@ -116,7 +119,7 @@ function CalendarPage() {
           isOpen={detailsModalOpen}
           onRequestClose={() => setDetailsModalOpen(false)}
           task={selectedTask}
-          onUpdate={() => {}}
+          onUpdate={handleUpdate}
         />
       )}
     </div>
