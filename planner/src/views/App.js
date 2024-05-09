@@ -7,7 +7,6 @@ import Footer from '../components/Footer';
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
-import ForgotPasswordPage from './ForgotPasswordPage';
 import AboutUsPage from './AboutUsPage';
 import ContactUsPage from './ContactUsPage';
 import AccountDetailsPage from './AccountDetailsPage';
@@ -23,7 +22,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/account-details" element={<AccountDetailsPage />} />
