@@ -51,14 +51,14 @@
 }
 
 .register-form button {
-    background-color: #4CAF50;
+    background-color: #cdb34c;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 .register-form button:hover {
-    background-color: #45a049;
+    background-color: #c1a944;
 }
 
 .register-form label {

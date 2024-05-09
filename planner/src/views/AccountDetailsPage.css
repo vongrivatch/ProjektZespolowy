@@ -31,23 +31,23 @@
 }
 
 .account-details button {
-  background-color: #4CAF50;
+  background-color: #cdb34c;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .account-details button:hover {
-  background-color: #45a049;
+  background-color: #c1a944;
 }
 
 .account-details a {
   display: block;
   margin-top: 10px;
-  color: #4CAF50;
+  color: #cdb34c;
   text-decoration: none;
 }
 
 .account-details a:hover {
-  color: #45a049;
+  color: #c1a944;
 }

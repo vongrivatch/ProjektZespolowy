@@ -38,7 +38,7 @@
 
 .family-management button {
   padding: 12px 20px;
-  background-color: #4CAF50;
+  background-color: #cdb34c;
   color: white;
   border: none;
   border-radius: 4px;
@@ -48,7 +48,7 @@
 }
 
 .family-management button:hover {
-  background-color: #45a049;
+  background-color: #c1a944;
 }
 
 .family-management textarea {
@@ -59,12 +59,12 @@
 .family-management a {
   display: block;
   margin-top: 10px;
-  color: #4CAF50;
+  color: #cdb34c;
   text-decoration: none;
 }
 
 .family-management a:hover {
-  color: #45a049;
+  color: #c1a944;
 }
 
 .member-item {

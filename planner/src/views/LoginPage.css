@@ -21,14 +21,14 @@
 }
 
 .login-page button {
-  background-color: #4CAF50;
+  background-color: #cdb34c;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .login-page button:hover {
-  background-color: #45a049;
+  background-color: #c1a944;
 }
 
 .login-page input {
