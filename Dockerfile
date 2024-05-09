@@ -16,3 +16,4 @@ COPY --from=build /app ./
 EXPOSE 5000
 
 CMD ["serve", "-s", "build", "-l", "5000"]
+
