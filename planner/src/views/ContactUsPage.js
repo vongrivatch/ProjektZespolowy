@@ -14,7 +14,7 @@ function ContactUs() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const mailtoLink = `mailto:mactro96@o2.pl?subject=${formData.subject}&body=Name: ${formData.name}%0AMessage: ${formData.message}`;
+    const mailtoLink = `mailto:maciej@wsb.pl?subject=${formData.subject}&body=Name: ${formData.name}%0AMessage: ${formData.message}`;
     window.location.href = mailtoLink;
   };
 
