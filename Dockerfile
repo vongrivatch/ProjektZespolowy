@@ -5,7 +5,7 @@ WORKDIR /app
 COPY planner/src/package*.json ./
 RUN npm install
 
-COPY flashcard-frontend ./
+COPY planner ./
 
 RUN npm run build
 
