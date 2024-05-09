@@ -2,11 +2,7 @@ FROM node:20 AS build
 
 WORKDIR /app
 
-COPY planner/src/package*.json ./
-
 RUN npm install
-
-COPY planner ./
 
 RUN npm run build
 
