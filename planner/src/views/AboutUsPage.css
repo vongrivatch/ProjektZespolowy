@@ -8,12 +8,21 @@
   margin-bottom: 20px;
 }
 
-.about-us p {
+.about-us p, .about-us-text {
   color: #6a6a6a;
   max-width: 800px;
   margin: 0 auto;
   text-align: justify;
   line-height: 1.6;
+}
+
+.about-us-text {
+  text-align: left;
+}
+
+.about-us-text ul {
+  padding-left: 0;
+  list-style-position: inside;
 }
 
 .about-us-images img {
