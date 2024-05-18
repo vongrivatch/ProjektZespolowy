@@ -1,19 +1,20 @@
 FROM node:20 AS build
 WORKDIR /app
 
-COPY . .  
+COPY package*.json ./
 RUN npm install
 
+COPY . .
 RUN npm run build
-
-COPY package*.json ./
-RUN npm install serve
 
 FROM node:20
 
-COPY --from=build /app ./
+WORKDIR /app
+
+COPY --from=build /app/build ./build
+COPY --from=build /app/package*.json ./
+RUN npm install -g serve
 
 EXPOSE 5000
 
 CMD ["serve", "-s", "build", "-l", "5000"]
-
