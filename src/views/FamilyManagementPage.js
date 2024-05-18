@@ -70,8 +70,8 @@ function FamilyManagementPage() {
   
         setFamilyMembers(familyMembers.filter(member => member.id !== memberId));
       } catch (error) {
-        console.error("Failed to remove family member: ", error);
-        alert("Failed to remove family member: ");
+        console.error("Failed to remove family member", error);
+        alert("Failed to remove family member");
       }
     }
   };
