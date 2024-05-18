@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth } from 'firebase/auth';
-import { doc, getFirestore, setDoc, collection, updateDoc, getDoc, arrayRemove } from 'firebase/firestore';
+import { doc, getFirestore, setDoc, collection, updateDoc, getDoc, runTransaction } from 'firebase/firestore';
 import './FamilyManagementPage.css';
 
 function FamilyManagementPage() {
@@ -52,10 +52,27 @@ function FamilyManagementPage() {
 
   const removeMember = async (memberId) => {
     if (window.confirm("Are you sure you want to remove this family member?")) {
-      await updateDoc(doc(db, "Families", familyId), {
-        members: arrayRemove(memberId)
-      });
-      setFamilyMembers(familyMembers.filter(member => member.id !== memberId));
+      try {
+        await runTransaction(db, async (transaction) => {
+          const familyRef = doc(db, "Families", familyId);
+          const memberRef = doc(db, "Users", memberId);
+  
+          const familyDoc = await transaction.get(familyRef);
+          if (!familyDoc.exists()) {
+            throw new Error("Family does not exist!");
+          }
+  
+          const newMembers = familyDoc.data().members.filter(id => id !== memberId);
+          transaction.update(familyRef, { members: newMembers });
+  
+          transaction.update(memberRef, { familyId: "" });
+        });
+  
+        setFamilyMembers(familyMembers.filter(member => member.id !== memberId));
+      } catch (error) {
+        console.error("Failed to remove family member: ", error);
+        alert("Failed to remove family member: ");
+      }
     }
   };
 
