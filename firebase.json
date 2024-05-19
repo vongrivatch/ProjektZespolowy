@@ -1,0 +1,103 @@
+{
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      ".hg",
+      "._darcs",
+      ".bzr",
+      "BitKeeper"
+    ],
+    "rewrites": [
+      {
+        "source": "/.hg/**",
+        "destination": "/404.html"
+      },
+      {
+        "source": "/._darcs/**",
+        "destination": "/404.html"
+      },
+      {
+        "source": "/.bzr/**",
+        "destination": "/404.html"
+      },
+      {
+        "source": "/BitKeeper/**",
+        "destination": "/404.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/404.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store"
+          },
+          {
+            "key": "Status",
+            "value": "404 Not Found"
+          }
+        ]
+      },
+      {
+        "source": "/.hg/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store"
+          },
+          {
+            "key": "Status",
+            "value": "404 Not Found"
+          }
+        ]
+      },
+      {
+        "source": "/._darcs/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store"
+          },
+          {
+            "key": "Status",
+            "value": "404 Not Found"
+          }
+        ]
+      },
+      {
+        "source": "/.bzr/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store"
+          },
+          {
+            "key": "Status",
+            "value": "404 Not Found"
+          }
+        ]
+      },
+      {
+        "source": "/BitKeeper/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store"
+          },
+          {
+            "key": "Status",
+            "value": "404 Not Found"
+          }
+        ]
+      }
+    ]
+  }
+}

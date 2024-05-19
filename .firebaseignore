@@ -1,0 +1,8 @@
+.hg
+._darcs
+.bzr
+BitKeeper
+
+firebase.json
+**/.*
+**/node_modules/**
